@@ -1,4 +1,9 @@
-﻿<!-- Snapshot imported from https://github.com/kalvinparker/WSL on 2025-11-01 -->
+﻿<!-- Imported from https://github.com/kalvinparker/WSL.git
+Commit: e847d61
+Author: C─ât─âlin Emil Fetoiu <fetoiucatalinemil@gmail.com>
+License: 
+Imported-on: 2025-11-01T22:17:34.7451547+00:00 -->
+
 This repo is for:
 
 - Reporting of issues found within and when using Windows Subsystem for Linux.
@@ -16,23 +21,23 @@ Note that WSL distro's launch in the Windows Console (unless you have taken step
 
 This is your best way to interact directly with the Windows Subsystem for Linux teams. We will be monitoring and responding to issues as best we can. Please attempt to avoid filing duplicates of open or closed items when possible. Issues may be tagged with with the following labels:
 
-- **bug** – The issue considered to be a bug internally by the dev team. This tag is generally for gaps in implemented (read: intended to be working) WSL behavior. Things marked with **bug** have a corresponding bug in on Microsoft’s internal bug tracking system. Example: "du -h reports wrong file size on DrvFs" [(#1894)](https://github.com/microsoft/WSL/issues/1894)
+- **bug** â€“ The issue considered to be a bug internally by the dev team. This tag is generally for gaps in implemented (read: intended to be working) WSL behavior. Things marked with **bug** have a corresponding bug in on Microsoftâ€™s internal bug tracking system. Example: "du -h reports wrong file size on DrvFs" [(#1894)](https://github.com/microsoft/WSL/issues/1894)
 
-- **feature** – Denotes something understood as not working and is not yet implemented. Example: "Cuda can not be installed" [(#327)](https://github.com/microsoft/WSL/issues/327)
+- **feature** â€“ Denotes something understood as not working and is not yet implemented. Example: "Cuda can not be installed" [(#327)](https://github.com/microsoft/WSL/issues/327)
 
-- **fixinbound** / **fixedinNNNN** – The bug or feature request originally submitted has been addressed in whole or in part. Related or ongoing bug or feature gaps should be opened as a new issue submission if one does not already exist.
+- **fixinbound** / **fixedinNNNN** â€“ The bug or feature request originally submitted has been addressed in whole or in part. Related or ongoing bug or feature gaps should be opened as a new issue submission if one does not already exist.
 
-- **duplicate** – The submission is substantially duplicative of an existing issue, and/or has the same underlying cause.
+- **duplicate** â€“ The submission is substantially duplicative of an existing issue, and/or has the same underlying cause.
 
-- **need-repro** – The issue submission is missing fields from the issue [template](https://github.com/microsoft/WSL/tree/master/.github/ISSUE_TEMPLATE), cannot be reproduced with the information provided, or is not actionable.
+- **need-repro** â€“ The issue submission is missing fields from the issue [template](https://github.com/microsoft/WSL/tree/master/.github/ISSUE_TEMPLATE), cannot be reproduced with the information provided, or is not actionable.
 
-- **discussion** / **question** – Submissions which are not a bug report or feature request. Example: Windows Subsystem for Linux is not open source [(#178)](https://github.com/Microsoft/WSL/issues/178)
+- **discussion** / **question** â€“ Submissions which are not a bug report or feature request. Example: Windows Subsystem for Linux is not open source [(#178)](https://github.com/Microsoft/WSL/issues/178)
 
-- **bydesign** / **linux-behavior** – Denotes that an issue that is considered working as intended or would behave analogously on a native Linux kernel.
+- **bydesign** / **linux-behavior** â€“ Denotes that an issue that is considered working as intended or would behave analogously on a native Linux kernel.
 
-- **console** – The submission should be directed to the [console issue tracker](https://github.com/microsoft/console/issues).
+- **console** â€“ The submission should be directed to the [console issue tracker](https://github.com/microsoft/console/issues).
 
-- **documentation** – The submission should be directed to the [WSL documentation issue tracker](https://github.com/MicrosoftDocs/WSL).
+- **documentation** â€“ The submission should be directed to the [WSL documentation issue tracker](https://github.com/MicrosoftDocs/WSL).
 
 - **wsl2** - The issue relates specifically to WSL 2.
 

@@ -1,412 +1,422 @@
-﻿# Docker Cheat Sheet
+﻿<!-- Imported from https://github.com/kalvinparker/docker-cheat-sheet.git
+Commit: ea7edbf
+Author: JacobLinCool <jacoblincool@gmail.com>
+License: 
+Imported-on: 2025-11-01T22:17:52.3709944+00:00 -->
 
-<!-- Snapshot imported from https://github.com/kalvinparker/docker-cheat-sheet on 2025-11-01 -->
+# Docker Cheat Sheet
 
-**Want to improve this cheat sheet?  See the [Contributing](#contributing) section!**
+**Â¿Quieres colaborar en este *cheat sheet*? Â¡Revisa la secciÃ³n de [ContribuciÃ³n](#contributing)!**
 
-## Table of Contents
+## Tabla de Contenidos
 
-* [Why Docker](#why-docker)
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-* [Containers](#containers)
-* [Images](#images)
-* [Networks](#networks)
-* [Registry and Repository](#registry--repository)
+* [Por quÃ© Docker](#por-quÃ©-Docker)
+* [Prerrequisitos](#prerrequisitos)
+* [InstalaciÃ³n](#instalaciÃ³n)
+* [Contenedores](#contenedores)
+* [ImÃ¡genes](#imÃ¡genes)
+* [Redes](#redes)
+* [Registry y Repositorios](#Registry-y-Repositorios)
 * [Dockerfile](#dockerfile)
-* [Layers](#layers)
-* [Links](#links)
-* [Volumes](#volumes)
-* [Exposing Ports](#exposing-ports)
-* [Best Practices](#best-practices)
+* [Capas](#capas)
+* [Enlaces](#enlaces)
+* [VolÃºmenes](#volÃºmenes)
+* [Exponiendo Puertos](#Exponiendo-Puertos)
+* [Buenas prÃ¡cticas](#buenas-prÃ¡cticas)
 * [Docker-Compose](#docker-compose)
-* [Security](#security)
-* [Tips](#tips)
-* [Contributing](#contributing)
+* [Seguridad](#seguridad)
+* [Consejos](#consejos)
+* [ContribuciÃ³n](#contribuciÃ³n)
 
-## Why Docker
+## Por quÃ© Docker
 
-"With Docker, developers can build any app in any language using any toolchain. “Dockerized” apps are completely portable and can run anywhere - colleagues’ OS X and Windows laptops, QA servers running Ubuntu in the cloud, and production data center VMs running Red Hat.
+"Con Docker, los desarrolladores (y desarrolladoras) pueden construir cualquier aplicaciÃ³n en cualquier lenguaje usando cualquier herramienta. Las aplicaciones "Dockerizadas" son totalmente portables y pueden funcionar en cualquier lugar: En portÃ¡tiles con OS X y Windows de compaÃ±eros; servidores de QA con Ubuntu en el cloud; y VMs de los datacenters de producciÃ³n que funcionan con Red Hat.
 
-Developers can get going quickly by starting with one of the 13,000+ apps available on Docker Hub. Docker manages and tracks changes and dependencies, making it easier for sysadmins to understand how the apps that developers build work. And with Docker Hub, developers can automate their build pipeline and share artifacts with collaborators through public or private repositories.
+Los desarrolladores pueden empezar a trabajar rÃ¡pidamente a partir de cualquiera de las mÃ¡s de 13.000 aplicaciones disponibles en Docker Hub. Docker gestiona y guarda los cambios y dependencias, facilitando el trabajo a los Administradores de Sistemas a la hora de entender cÃ³mo funcionan las aplicaciones hechas por los desarrolladores. Y, con Docker Hub, los desarrolladores puedes automatizar el despliegue y compartir el trabajo con colaboradores a travÃ©s de repositorios pÃºblicos o privados.
 
-Docker helps developers build and ship higher-quality applications, faster." -- [What is Docker](https://www.docker.com/what-docker#copy1)
+Docker ayuda a los desarrolladores a trabajar y conseguir aplicaciones de mejor calidad de forma mÃ¡s rÃ¡pida." -- [QuÃ© es docker](https://www.docker.com/what-docker#copy1)
 
-## Prerequisites
+## Prerrequisitos
 
-I use [Oh My Zsh](https://github.com/ohmyzsh/oh-my-zsh) with the [Docker plugin](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#docker) for autocompletion of docker commands. YMMV.
+De forma opcional, se puede hacer utilizar [Oh My Zsh](https://github.com/ohmyzsh/oh-my-zsh) con el [plugin de Docker](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#docker) para autocompletar los comandos de Docker.
 
 ### Linux
 
-The 3.10.x kernel is [the minimum requirement](https://docs.docker.com/engine/installation/binaries/#check-kernel-dependencies) for Docker.
+[El requisito mÃ­nimo](https://docs.docker.com/engine/installation/binaries/#check-kernel-dependencies) para Docker es utilizar una versiÃ³n de Kernel (nÃºcleo) posterior a la 3.10.x.
 
 ### MacOS
 
-10.8 “Mountain Lion” or newer is required.
+Se requiere de la versiÃ³n 10.8 â€œMountain Lionâ€ o posterior.
 
 ### Windows 10
 
-Hyper-V must be enabled in BIOS
+Se debe activar Hyper-V en la BIOS.
 
-VT-D must also be enabled if available (Intel Processors).
+En caso de estar disponible, tambiÃ©n se debe activar VT-D (Procesadores Intel).
 
 ### Windows Server
 
-Windows Server 2016 is the minimum version required to install docker and docker-compose. Limitations exist on this version, such as multiple virtual networks and Linux containers. Windows Server 2019 and later are recommended. 
+Como mÃ­nimo se requiere la versiÃ­n de Windows Server 2016 para instalar Docker y Docker Compose. No obstante, existen limitaciones en esta versiÃ³n, como a la hora de utilizar redes virtualizadas y contenedores Linux.
 
-## Installation
+Se recomienda utilizar Windows Server 2019 o posteriores.
+
+## InstalaciÃ³n
 
 ### Linux
 
-Run this quick and easy install script provided by Docker:
+Ejecuta este comando rÃ¡pido y sencillo proporcionado por Docker:
 
 ```sh
 curl -sSL https://get.docker.com/ | sh
 ```
 
-If you're not willing to run a random shell script, please see the [installation](https://docs.docker.com/engine/installation/linux/) instructions for your distribution.
+Si no estÃ¡s dispuesto a ejecutar un shell script que no sabes lo que trae, por favor: revisa las instrucciones de [instalaciÃ³n](https://docs.docker.com/engine/installation/linux/) de tu distribuciÃ³n.
 
-If you are a complete Docker newbie, you should follow the [series of tutorials](https://docs.docker.com/engine/getstarted/) now.
+Si eres totalmente nuevo en Docker, te recomendamos seguir esta [serie de tutoriales](https://docs.docker.com/engine/getstarted/).
 
 ### macOS
 
-Download and install [Docker Community Edition](https://www.docker.com/community-edition). if you have Homebrew-Cask, just type `brew install --cask docker`. Or Download and install [Docker Toolbox](https://docs.docker.com/toolbox/overview/).  [Docker For Mac](https://docs.docker.com/docker-for-mac/) is nice, but it's not quite as finished as the VirtualBox install.  [See the comparison](https://docs.docker.com/docker-for-mac/docker-toolbox/).
+Descarga e instala [Docker Community Edition](https://www.docker.com/community-edition). Si tienes Homebrew-Cask, simplemente escribe `brew install --cask docker`. O descarga e instala [Docker Toolbox](https://docs.docker.com/toolbox/overview/). [Docker For Mac](https://docs.docker.com/docker-for-mac/) estÃ¡ bien, pero no estÃ¡ tan pulido como como la instalaciÃ³n de VirtualBox. [Revisa la comparaciÃ³n aquÃ­](https://docs.docker.com/docker-for-mac/docker-toolbox/).
 
-> **NOTE** Docker Toolbox is legacy. You should to use Docker Community Edition, See [Docker Toolbox](https://docs.docker.com/toolbox/overview/).
+> **NOTA:** Docker Toolbox estÃ¡ deprecado. DeberÃ­as utilizar Docker Community Edition, revisa [Docker Toolbox](https://docs.docker.com/toolbox/overview/).
 
-Once you've installed Docker Community Edition, click the docker icon in Launchpad. Then start up a container:
+Una vez hayas instalado Docker Community Edition, haz click en el icono de docker en el Launchpad. Entonces inicia un contenedor:
 
 ```sh
 docker run hello-world
 ```
 
-That's it, you have a running Docker container.
+Â¡Y ya estarÃ­a! Ya tienes un contenedor de docker funcionando.
 
-If you are a complete Docker newbie, you should probably follow the [series of tutorials](https://docs.docker.com/engine/getstarted/) now.
+Si eres totalmente nuevo en Docker, te recomendamos seguir esta [serie de tutoriales](https://docs.docker.com/engine/getstarted/).
 
 ### Windows 10
 
-Instructions to install Docker Desktop for Windows can be found [here](https://docs.docker.com/desktop/windows/install/)
+Las instrucciones para instalar Docker Desktop para Windows se encuentran [aquÃ­](https://docs.docker.com/desktop/windows/install/)
 
-Once installed, open powershell as administrator and run:
+Una vez instalado, abre Powershell como administrador y ejecuta:
 
 ```powershell
-# Display the version of docker installed:
+# Muestra la versiÃ³n de docker instalada:
 docker version
 
-# Pull, create, and run 'hello-world':
+# Descarga, crea, y ejecuta 'hello-world':
 docker run hello-world
 ```
 
-To continue with this cheat sheet, right click the Docker icon in the system tray, and go to settings. In order to mount volumes, the C:/ drive will need to be enabled in the settings to that information can be passed into the containers (later described in this article). 
+Para continuar con esta chuleta, haz click derecho sobre el icono de Docker en la secciÃ³n de notificaciones (abajo a la derecha), y ves a ajustes. Para montar volÃºmenes, el disco C:/ debe ser habilitado en ajustes para poder pasar la informaciÃ³n a los contenedores (se detalla mÃ¡s adelante en este artÃ­culo).
 
-To switch between Windows containers and Linux containers, right click the icon in the system tray and click the button to switch container operating system Doing this will stop the current containers that are running, and make them unaccessible until the container OS is switched back.
+Para alternar entre contenedores Windows y Linux, haz botÃ³n derecho en el icono de Docker en la secciÃ³n de notificaciones y haz click en el botÃ³n de cambiar el sistema operativo del contenedor. Hacer esto pararÃ¡ los contenedores que estÃ©n funcionando y serÃ¡n inaccesibles hasta que el SO del contenedor vuelva a cambiar.
 
-Additionally, if you have WSL or WSL2 installed on your desktop, you might want to install the Linux Kernel for Windows. Instructions can be found [here](https://techcommunity.microsoft.com/t5/windows-dev-appconsult/using-wsl2-in-a-docker-linux-container-on-windows-to-run-a/ba-p/1482133). This requires the Windows Subsystem for Linux feature. This will allow for containers to be accessed by WSL operating systems, as well as the efficiency gain from running WSL operating systems in docker. It is also preferred to use [Windows terminal](https://docs.microsoft.com/en-us/windows/terminal/get-started) for this.
+Adicionalmente, si tienes WSL (Subsitema de Windows para Linux) o WSL2 instalado en tu equipo, quizÃ¡s tambiÃ©n quieras instalar el Kernel de Linux para Windows. Las instrucciones para ello pueden encontrarse [aquÃ­](https://techcommunity.microsoft.com/t5/windows-dev-appconsult/using-wsl2-in-a-docker-linux-container-on-windows-to-run-a/ba-p/1482133). Esto requiere la caracterÃ­stica de Subsistema de Windows para Linux. Esto permitirÃ¡ que los contenedores sean accesibles desde los sistemas operativos WSL, asÃ­ como mejorar la eficiencia ejecutando sistemas operaviso WSL en docker. TambiÃ©n es preferible utilizar la [terminal de Windows](https://docs.microsoft.com/en-us/windows/terminal/get-started) para esto.
 
 ### Windows Server 2016 / 2019
 
-Follow Microsoft's instructions that can be found [here](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/deploy-containers-on-server#install-docker)
+Sigue las instrucciones de Microsoft que puedes encontrar [aquÃ­](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/deploy-containers-on-server#install-docker)
 
-If using the latest edge version of 2019, be prepared to only work in powershell, as it is only a servercore image (no desktop interface). When starting this machine, it will login and go straight to a powershell window. It is reccomended to install text editors and other tools using [Chocolatey](https://chocolatey.org/install).
+Si haces uso de la Ãºltima versiÃ³n de 2019, prepÃ¡rate para trabajar solo con powershell, dado que es solo una imÃ¡gen del nÃºcleo del servidor (sin interfaz de escritorio). Cuando inicies esta mÃ¡quina, se loguearÃ¡ y mostrarÃ¡ una ventana de powerhell. Se recomienda instalar editores de texto y otras herramientas utilizando [Chocolatey](https://chocolatey.org/install)
 
-After installing, these commands will work:
+Tras instalarlo, funcionarÃ¡n los siguientes comandos:
 
 ```powershell
-# Display the version of docker installed:
+# Muestra la versiÃ³n de docker instalada:
 docker version
 
-# Pull, create, and run 'hello-world':
+# Descarga, crea, y ejecuta 'hello-world':
 docker run hello-world
 ```
 
-Windows Server 2016 is not able to run Linux images. 
+Windows Server 2016 no puede ejecutar imÃ¡genes de Linux.
 
-Windows Server Build 2004 is capable of running both linux and windows containers simultaneously through Hyper-V isolation. When running containers, use the ```--isolation=hyperv``` command, which will isolate the container using a seperate kernel instance. 
+Windows Server Build 2004 es capaz de ejecutar contenedores de Linux y Windows simultÃ¡neamente a travÃ©s del aislamiento de Hyper-V. Cuando se ejecuten los contenedores, utiliza el comando ```isolation=hyperv```, el cual lo aislarÃ¡ utilizando distintas instancias de kernel para cada contenedor.
 
-### Check Version
+### Revisar la versiÃ³n
 
-It is very important that you always know the current version of Docker you are currently running on at any point in time. This is very helpful because you get to know what features are compatible with what you have running. This is also important because you know what containers to run from the docker store when you are trying to get template containers. That said let see how to know which version of docker we have running currently.
+Es muy importante que siempre conozcas la versiÃ³n de Docker que estÃ¡s utilizando en cualquier momento. Es muy Ãºtil dado que permite saber las caracterÃ­sticas compatibles con lo que estÃ©s ejecutando. Esto tambiÃ©n es importante para conocer que contenedores puedes ejecutar de la docker store cuando estÃ©s intentando utilizar un contenedor como plantilla. Dicho esto, veamos como recuperar la versiÃ³n de Docker que estÃ¡ ejecutÃ¡ndose actualmente.
 
-* [`docker version`](https://docs.docker.com/engine/reference/commandline/version/) shows which version of docker you have running.
+* [`docker version`](https://docs.docker.com/engine/reference/commandline/version/) muestra que versiÃ³n de docker estÃ¡ ejecutÃ¡ndose.
 
-Get the server version:
+Recuperar la versiÃ³n del servidor:
 
 ```console
 $ docker version --format '{{.Server.Version}}'
 1.8.0
 ```
 
-You can also dump raw JSON data:
+Puedes volcar la informaciÃ³n en un JSON:
 
 ```console
 $ docker version --format '{{json .}}'
 {"Client":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"am"}
 ```
 
-## Containers
+## Contenedores
 
-[Your basic isolated Docker process](http://etherealmind.com/basics-docker-containers-hypervisors-coreos/). Containers are to Virtual Machines as threads are to processes. Or you can think of them as chroots on steroids.
+[Proceso bÃ¡sico del aislamiento en Docker](http://etherealmind.com/basics-docker-containers-hypervisors-coreos/). Los contenedores son a las mÃ¡quinas virtuales lo que los threads son a los procesos. O puedes verlo como un *chroot* dopado.
 
-### Lifecycle
+### Ciclo de vida
 
-* [`docker create`](https://docs.docker.com/engine/reference/commandline/create) creates a container but does not start it.
-* [`docker rename`](https://docs.docker.com/engine/reference/commandline/rename/) allows the container to be renamed.
-* [`docker run`](https://docs.docker.com/engine/reference/commandline/run) creates and starts a container in one operation.
-* [`docker rm`](https://docs.docker.com/engine/reference/commandline/rm) deletes a container.
-* [`docker update`](https://docs.docker.com/engine/reference/commandline/update/) updates a container's resource limits.
+* [`docker create`](https://docs.docker.com/engine/reference/commandline/create) crea un contenedor pero no lo inicia.
+* [`docker rename`](https://docs.docker.com/engine/reference/commandline/rename/) permite renombrar el nombre de un contenedor.
+* [`docker run`](https://docs.docker.com/engine/reference/commandline/run) crea e inicia un contenedor.
+* [`docker rm`](https://docs.docker.com/engine/reference/commandline/rm) elimina un contenedor.
+* [`docker update`](https://docs.docker.com/engine/reference/commandline/update/) actualiza los recursos mÃ¡ximos de un contenedor.
 
-Normally if you run a container without options it will start and stop immediately, if you want keep it running you can use the command, `docker run -td container_id` this will use the option `-t` that will allocate a pseudo-TTY session and `-d` that will detach automatically the container (run container in background and print container ID).
+Si ejecutas un contenedor sin opciones este se iniciarÃ¡ y detendrÃ¡ automÃ¡ticamente, si quieres mantenerlo funcionando puedes utilizar el comando `docker run -td container_id`, esto utilizarÃ¡ la opciÃ³n `-t`, que habilitarÃ¡ una pseudo-sesiÃ³n de TTY, y `-d`, que separarÃ¡ el contenedor automÃ¡ticamente (lo ejecutarÃ¡ en segundo plano y mostrarÃ¡ la ID del contenedor)
 
-If you want a transient container, `docker run --rm` will remove the container after it stops.
+Si quieres un contenedor efÃ­mero, `docker run --rm` eliminarÃ¡ el contenedor en cuanto se detenga.
 
-If you want to map a directory on the host to a docker container, `docker run -v $HOSTDIR:$DOCKERDIR`. Also see [Volumes](https://github.com/wsargent/docker-cheat-sheet/#volumes).
+Si quieres mapear un directorio del host al contenedor de docker, `docker run -v $HOSTDIR:$DOCKERDIR`. Revisa [VolÃºmenes](https://github.com/wsargent/docker-cheat-sheet/#volumes).
 
-If you want to remove also the volumes associated with the container, the deletion of the container must include the `-v` switch like in `docker rm -v`.
+Si al eliminar el contenedor tambiÃ©n quieres borrar los volÃºmenes asociados, el borrado deberÃ¡ contener `-v`, por ejemplo: `docker rm -v`.
 
-There's also a [logging driver](https://docs.docker.com/engine/admin/logging/overview/) available for individual containers in docker 1.10. To run docker with a custom log driver (i.e., to syslog), use `docker run --log-driver=syslog`.
+TambiÃ©n existe un [driver de logs](https://docs.docker.com/engine/admin/logging/overview/) disponible para contenedores individuales en Docker 1.10. Para ejecutar docker con un driver de logs personalizado, ejecuta `docker run --log-driver=syslog`.
 
-Another useful option is `docker run --name yourname docker_image` because when you specify the `--name` inside the run command this will allow you to start and stop a container by calling it with the name the you specified when you created it.
+Otra opciÃ³nÃºtil es `docker run --name yourname docker_image` donde especificando la opciÃ³n `--name` dentro del comando *run*, esto te permitirÃ¡ iniciar y detener el contenedor utilizando el nombre especificado al crearlo.
 
-### Starting and Stopping
+### Ejecutando y deteniendo
 
-* [`docker start`](https://docs.docker.com/engine/reference/commandline/start) starts a container so it is running.
-* [`docker stop`](https://docs.docker.com/engine/reference/commandline/stop) stops a running container.
-* [`docker restart`](https://docs.docker.com/engine/reference/commandline/restart) stops and starts a container.
-* [`docker pause`](https://docs.docker.com/engine/reference/commandline/pause/) pauses a running container, "freezing" it in place.
-* [`docker unpause`](https://docs.docker.com/engine/reference/commandline/unpause/) will unpause a running container.
-* [`docker wait`](https://docs.docker.com/engine/reference/commandline/wait) blocks until running container stops.
-* [`docker kill`](https://docs.docker.com/engine/reference/commandline/kill) sends a SIGKILL to a running container.
-* [`docker attach`](https://docs.docker.com/engine/reference/commandline/attach) will connect to a running container.
+* [`docker start`](https://docs.docker.com/engine/reference/commandline/start) inicia un contenedor.
+* [`docker stop`](https://docs.docker.com/engine/reference/commandline/stop) detiene un contenedor que estÃ© iniciado.
+* [`docker restart`](https://docs.docker.com/engine/reference/commandline/restart) detiene y ejecuta un contenedor.
+* [`docker pause`](https://docs.docker.com/engine/reference/commandline/pause/) pausa un contenedor que se estÃ¡ ejecutando, congelÃ¡ndolo.
+* [`docker unpause`](https://docs.docker.com/engine/reference/commandline/unpause/) reactiva un contenedor.
+* [`docker wait`](https://docs.docker.com/engine/reference/commandline/wait) se bloquea hasta que el contenedor se detiene.
+* [`docker kill`](https://docs.docker.com/engine/reference/commandline/kill) envÃ­a una SIGKILL a un contenedor.
+* [`docker attach`](https://docs.docker.com/engine/reference/commandline/attach) se conecta a un contenedor.
 
-If you want to detach from a running container, use `Ctrl + p, Ctrl + q`.
-If you want to integrate a container with a [host process manager](https://docs.docker.com/engine/admin/host_integration/), start the daemon with `-r=false` then use `docker start -a`.
+Si quieres despegarte de un contenedor, utiliza `Ctrl + p, Ctrl + q`.
 
-If you want to expose container ports through the host, see the [exposing ports](#exposing-ports) section.
+Si quieres integrar un contenedor con un [gestor de procesos](https://docs.docker.com/engine/admin/host_integration/), inicia el daemon con `-r=false`, despuÃ©s utiliza `docker start -a`.
 
-Restart policies on crashed docker instances are [covered here](http://container42.com/2014/09/30/docker-restart-policies/).
+Si quieres exponer un puerto del contenedor a travÃ©s del host, revisa la secciÃ³n [exponiendo puertos](#exposing-ports).
 
-#### CPU Constraints
+Las polÃ­ticas de reinicio en una instancia bloqueada se [explica aquÃ­](http://container42.com/2014/09/30/docker-restart-policies/).
 
-You can limit CPU, either using a percentage of all CPUs, or by using specific cores.  
+#### Restricciones de CPU
 
-For example, you can tell the [`cpu-shares`](https://docs.docker.com/engine/reference/run/#/cpu-share-constraint) setting.  The setting is a bit strange -- 1024 means 100% of the CPU, so if you want the container to take 50% of all CPU cores, you should specify 512.  See <https://goldmann.pl/blog/2014/09/11/resource-management-in-docker/#_cpu> for more:
+Puedes limitar la CPU, ya sea especificando el porcentÃ¡ge global de las CPU o definiendo el nÃºmero de nÃºcleos.
+
+Por ejemplo, puedes especificar la configuraciÃ³n de [`cpu-shares`](https://docs.docker.com/engine/reference/run/#/cpu-share-constraint). Este parÃ¡metro es un poco raro -- 1024 significa el 100% de la CPU, por lo que si quieres que el contenedor utilice el 50% de todas las CPU, deberÃ¡s especificar 512. Revisa <https://docs.docker.com/engine/reference/run/#/cpu-share-constraint> para mÃ¡s informaciÃ³n.
 
 ```sh
 docker run -it -c 512 agileek/cpuset-test
 ```
 
-You can also only use some CPU cores using [`cpuset-cpus`](https://docs.docker.com/engine/reference/run/#/cpuset-constraint).  See <https://agileek.github.io/docker/2014/08/06/docker-cpuset/> for details and some nice videos:
+TambiÃ©s puedes utilizar Ãºnicamente algunos nÃºcleos de la CPU utilizando [`cpuset-cpus`](https://docs.docker.com/engine/reference/run/#/cpuset-constraint). Revisa <https://agileek.github.io/docker/2014/08/06/docker-cpuset/> para mÃ¡s detalles y algunos vÃ­deos guays:
 
 ```sh
 docker run -it --cpuset-cpus=0,4,6 agileek/cpuset-test
 ```
 
-Note that Docker can still **see** all of the CPUs inside the container -- it just isn't using all of them.  See <https://github.com/docker/docker/issues/20770> for more details.
+FÃ­jate que Docker puede seguir **viendo** todas las CPU dentro del contenedor -- simplemente no la utiliza entera. Revisa <https://github.com/docker/docker/issues/20770> para mÃ¡s informaciÃ³n.
 
-#### Memory Constraints
+#### Restricciones de memoria
 
-You can also set [memory constraints](https://docs.docker.com/engine/reference/run/#/user-memory-constraints) on Docker:
+TambiÃ©n puedes especificar [restricciones de memoria](https://docs.docker.com/engine/reference/run/#/user-memory-constraints) en Docker
 
 ```sh
 docker run -it -m 300M ubuntu:14.04 /bin/bash
 ```
 
-#### Capabilities
+#### Capacidades
 
-Linux capabilities can be set by using `cap-add` and `cap-drop`.  See <https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities> for details.  This should be used for greater security.
+Las capacidades de linux se pueden establecer utilizando `cap-add` y `cap-drop`. Revisa <https://docs.docker.com/engine/reference/run/#/runtime-privilege-and-linux-capabilities> para mÃ¡s detalles. Debe usarse para una mejor seguridad.
 
-To mount a FUSE based filesystem, you need to combine both --cap-add and --device:
+Para montar un sistema de ficheros basado en FUSE, debes combinar --cap-add con --device:
 
 ```sh
 docker run --rm -it --cap-add SYS_ADMIN --device /dev/fuse sshfs
 ```
 
-Give access to a single device:
+Para dar acceso a un Ãºnico dispositivo:
 
 ```sh
 docker run -it --device=/dev/ttyUSB0 debian bash
 ```
 
-Give access to all devices:
+Para dar acceso a todos los dispositivos:
 
 ```sh
 docker run -it --privileged -v /dev/bus/usb:/dev/bus/usb debian bash
 ```
 
-More info about privileged containers [here](
-https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
+MÃ¡s informaciÃ³n sobre contenedores con privilegios [aquÃ­](
+https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
 
-### Info
+### InformaciÃ³n
 
-* [`docker ps`](https://docs.docker.com/engine/reference/commandline/ps) shows running containers.
-* [`docker logs`](https://docs.docker.com/engine/reference/commandline/logs) gets logs from container.  (You can use a custom log driver, but logs is only available for `json-file` and `journald` in 1.10).
-* [`docker inspect`](https://docs.docker.com/engine/reference/commandline/inspect) looks at all the info on a container (including IP address).
-* [`docker events`](https://docs.docker.com/engine/reference/commandline/events) gets events from container.
-* [`docker port`](https://docs.docker.com/engine/reference/commandline/port) shows public facing port of container.
-* [`docker top`](https://docs.docker.com/engine/reference/commandline/top) shows running processes in container.
-* [`docker stats`](https://docs.docker.com/engine/reference/commandline/stats) shows containers' resource usage statistics.
-* [`docker diff`](https://docs.docker.com/engine/reference/commandline/diff) shows changed files in the container's FS.
+* [`docker ps`](https://docs.docker.com/engine/reference/commandline/ps) muestra los contenedores funcionando.
+* [`docker logs`](https://docs.docker.com/engine/reference/commandline/logs) recupera los logs del contenedor. (Puedes utilizar un driver personalizado para los logs, pero los logs solo estÃ¡n disponibles para `json-file` y `journald` en la versiÃ³n 1.10).
+* [`docker inspect`](https://docs.docker.com/engine/reference/commandline/inspect) revisa toda la informaciÃ³n del contenedor (incluyendo la direcciÃ³n IP).
+* [`docker events`](https://docs.docker.com/engine/reference/commandline/events) recupera los eventos del contenedor.
+* [`docker port`](https://docs.docker.com/engine/reference/commandline/port) muestra los puertos abiertos al exterior del contenedor.
+* [`docker top`](https://docs.docker.com/engine/reference/commandline/top) muestra los procesos que se estÃ¡n ejecutando en el contenedor,
+* [`docker stats`](https://docs.docker.com/engine/reference/commandline/stats) Muestra las estadÃ­sticas del uso de recursos del contenedor.
+* [`docker diff`](https://docs.docker.com/engine/reference/commandline/diff) Muestra los archivos que han cambiado en el sistema de ficheros del contenedor.
 
-`docker ps -a` shows running and stopped containers.
+`docker ps -a` muestra todos los contenedores: que estÃ¡n funcionados o parados.
 
-`docker stats --all` shows a list of all containers, default shows just running.
+`docker stats --all` lista todos los contenedores, por defecto solo los que estÃ¡n funcionando.
 
 ### Import / Export
 
-* [`docker cp`](https://docs.docker.com/engine/reference/commandline/cp) copies files or folders between a container and the local filesystem.
-* [`docker export`](https://docs.docker.com/engine/reference/commandline/export) turns container filesystem into tarball archive stream to STDOUT.
+* [`docker cp`](https://docs.docker.com/engine/reference/commandline/cp) copia los ficheros y carpetas de un contenedor al sistema de ficheros local.
+* [`docker export`](https://docs.docker.com/engine/reference/commandline/export) vuelca el sistema de ficheros de un contenedor como fichero .tar en el STDOUT.
 
-### Executing Commands
+### Ejecuntando comandos
 
-* [`docker exec`](https://docs.docker.com/engine/reference/commandline/exec) to execute a command in container.
+* [`docker exec`](https://docs.docker.com/engine/reference/commandline/exec) ejecuta un comando en el contenedor.
 
-To enter a running container, attach a new shell process to a running container called foo, use: `docker exec -it foo /bin/bash`.
+Para entrar a un contenedor que estÃ¡ funcionando, acopla un nuevo proceso de terminal al contenedor usando: `docker exec -it <ID/Nombre del contenedor> /bin/bash`.
 
-## Images
+## ImÃ¡genes
 
-Images are just [templates for docker containers](https://docs.docker.com/engine/understanding-docker/#how-does-a-docker-image-work).
 
-### Lifecycle
+Las imÃ¡genes simplemente son [plantillas para contenedores de docker](https://docs.docker.com/engine/understanding-docker/#how-does-a-docker-image-work).
 
-* [`docker images`](https://docs.docker.com/engine/reference/commandline/images) shows all images.
-* [`docker import`](https://docs.docker.com/engine/reference/commandline/import) creates an image from a tarball.
-* [`docker build`](https://docs.docker.com/engine/reference/commandline/build) creates image from Dockerfile.
-* [`docker commit`](https://docs.docker.com/engine/reference/commandline/commit) creates image from a container, pausing it temporarily if it is running.
-* [`docker rmi`](https://docs.docker.com/engine/reference/commandline/rmi) removes an image.
-* [`docker load`](https://docs.docker.com/engine/reference/commandline/load) loads an image from a tar archive as STDIN, including images and tags (as of 0.7).
-* [`docker save`](https://docs.docker.com/engine/reference/commandline/save) saves an image to a tar archive stream to STDOUT with all parent layers, tags & versions (as of 0.7).
+### Ciclo de vida
 
-### Info
+* [`docker images`](https://docs.docker.com/engine/reference/commandline/images) muestra todas las imÃ¡genes.
+* [`docker import`](https://docs.docker.com/engine/reference/commandline/import) crea una imÃ¡gen a partir de un fichero .tar.
+* [`docker build`](https://docs.docker.com/engine/reference/commandline/build) crea una imÃ¡gen a partir de un Dockerfile.
+* [`docker commit`](https://docs.docker.com/engine/reference/commandline/commit) crea una imÃ¡gen a partir de un contenedor, deteniÃ©ndolo temporalmente si estÃ¡ funcionando.
+* [`docker rmi`](https://docs.docker.com/engine/reference/commandline/rmi) elimina una imÃ¡gen.
+* [`docker load`](https://docs.docker.com/engine/reference/commandline/load) carga una imÃ¡gen a partir de un fichero .tar pasado como STDIN, incluyendo imÃ¡genes y etiquetas.
+* [`docker save`](https://docs.docker.com/engine/reference/commandline/save) guarda una imÃ¡gen en un fichero .tar pasado como STDOUT con todas las capas superiores, etiquetas y versiones.
 
-* [`docker history`](https://docs.docker.com/engine/reference/commandline/history) shows history of image.
-* [`docker tag`](https://docs.docker.com/engine/reference/commandline/tag) tags an image to a name (local or registry).
+### InformaciÃ³n
 
-### Cleaning up
+* [`docker history`](https://docs.docker.com/engine/reference/commandline/history) muestra el historial de una imÃ¡gen.
+* [`docker tag`](https://docs.docker.com/engine/reference/commandline/tag) etiqueta una imÃ¡gen (local o *registry*).
 
-While you can use the `docker rmi` command to remove specific images, there's a tool called [docker-gc](https://github.com/spotify/docker-gc) that will safely clean up images that are no longer used by any containers. As of docker 1.13, `docker image prune` is also available for removing unused images. See [Prune](#prune).
+### Limpiar
 
-### Load/Save image
+Puedes utilizar el comando `docker rmi` para eliminar una imÃ¡gen especÃ­fica, pero tambiÃ©n existe una herramienta alternativa llamada [docker-gc](https://github.com/spotify/docker-gc) que elimina de forma segura las imÃ¡genes que ya no estÃ¡n siendo utilizadas por ningÃºn contenedor. En la versiÃ³n 1.13 de docker, tambiÃ©n existe el comando `docker image prine`, el cual elimina las imÃ¡genes que no estÃ¡n siendo utilizadas. Revisa [Prune](#prune)
 
-Load an image from file:
+### Cargar/Guardar una imÃ¡gen
+
+Carga una imÃ¡gen a partir de un fichero:
 
 ```sh
 docker load < my_image.tar.gz
 ```
 
-Save an existing image:
+Guarda una imÃ¡gen existente:
 
 ```sh
 docker save my_image:my_tag | gzip > my_image.tar.gz
 ```
 
-### Import/Export container
+### Importar/Exportar un contenedor
 
-Import a container as an image from file:
+Importa un contenedor como imÃ¡gen a partir de un fichero:
 
 ```sh
 cat my_container.tar.gz | docker import - my_image:my_tag
 ```
 
-Export an existing container:
+Exporta un contenedor existente:
 
 ```sh
 docker export my_container | gzip > my_container.tar.gz
 ```
 
-### Difference between loading a saved image and importing an exported container as an image
+### Diferencia entre cargar y guardar una imÃ¡gen e importar y exportar un contenedor como imÃ¡gen
 
-Loading an image using the `load` command creates a new image including its history.  
-Importing a container as an image using the `import` command creates a new image excluding the history which results in a smaller image size compared to loading an image.
+Cargar una imÃ¡gen utilizando el comando `load` crea una nueva imÃ¡gen incluyeno su historial.
+Importar un contenedor como imÃ¡gen utilizando el comando `import` crea una nueva imÃ¡gen excluyendo el historial, lo que se traduce en una imÃ¡gen mÃ¡s ligera comparada con cargarla.
 
-## Networks
+## Redes
 
-Docker has a [networks](https://docs.docker.com/engine/userguide/networking/) feature. Docker automatically creates 3 network interfaces when you install it (bridge, host none). A new container is launched into the bridge network by default. To enable communication between multiple containers, you can create a new network and launch containers in it. This enables containers to communicate to each other while being isolated from containers that are not connected to the network. Furthermore, it allows to map container names to their IP addresses. See [working with networks](https://docs.docker.com/engine/userguide/networking/work-with-networks/) for more details.
+Docker tiene la caracterÃ­stica de [Redes](https://docs.docker.com/engine/userguide/networking/). Docker automÃ¡ticamente crea tres interficies de red al instalarlo (puente, host, nula). Por defecto, cuando se lanza un nuevo contenedor es aÃ±adido la red puente. Para habilitar la comunicaciÃ³n entre varios contenedores puedes crear una nueva red y lanzar los contenedores en ella. Esto permite a los contenedores comunicarse entre ellos y aislarese de los contenedores que no estÃ¡n conectados a su misma red. AdemÃ¡s, esto permite mapear nombres de contenedores a sus direcciones IP. Revisa *[working with networks](https://docs.docker.com/engine/userguide/networking/work-with-networks/)* para mÃ¡s informaciÃ³n.
 
-### Lifecycle
+### Ciclo de vida
 
-* [`docker network create`](https://docs.docker.com/engine/reference/commandline/network_create/) NAME Create a new network (default type: bridge).
-* [`docker network rm`](https://docs.docker.com/engine/reference/commandline/network_rm/) NAME Remove one or more networks by name or identifier. No containers can be connected to the network when deleting it.
+* [`docker network create`](https://docs.docker.com/engine/reference/commandline/network_create/) NAME Crea una nueva red (por defecto de tipo puente).
+* [`docker network rm`](https://docs.docker.com/engine/reference/commandline/network_rm/) NAME Elimina una o mÃ¡s redes indicando el nombre o el identificador. No pueden haber contenedores conectados a la red al eliminarla.
 
 ### Info
 
-* [`docker network ls`](https://docs.docker.com/engine/reference/commandline/network_ls/) List networks
-* [`docker network inspect`](https://docs.docker.com/engine/reference/commandline/network_inspect/) NAME Display detailed information on one or more networks.
+* [`docker network ls`](https://docs.docker.com/engine/reference/commandline/network_ls/) Lista las redes creadas.
+* [`docker network inspect`](https://docs.docker.com/engine/reference/commandline/network_inspect/) NAME Muestra informaciÃ³n detallada de una o mÃ¡s redes.
 
 ### Connection
 
-* [`docker network connect`](https://docs.docker.com/engine/reference/commandline/network_connect/) NETWORK CONTAINER Connect a container to a network
-* [`docker network disconnect`](https://docs.docker.com/engine/reference/commandline/network_disconnect/) NETWORK CONTAINER Disconnect a container from a network
+* [`docker network connect`](https://docs.docker.com/engine/reference/commandline/network_connect/) NETWORK CONTAINER Conecta un contenedor a una red.
+* [`docker network disconnect`](https://docs.docker.com/engine/reference/commandline/network_disconnect/) NETWORK CONTAINER Desconecta un contenedor de una red.
 
-You can specify a [specific IP address for a container](https://blog.jessfraz.com/post/ips-for-all-the-things/):
+Puedes especificar una [ip especÃ­fica a un contenedor](https://blog.jessfraz.com/post/ips-for-all-the-things/):
 
 ```sh
-# create a new bridge network with your subnet and gateway for your ip block
+# crea una nueva red puente con la subnet y puerta de enlace especÃ­ficada
 docker network create --subnet 203.0.113.0/24 --gateway 203.0.113.254 iptastic
 
-# run a nginx container with a specific ip in that block
+# ejecuta un contenedor de nginx con al ip especificada en la red iptastic
 $ docker run --rm -it --net iptastic --ip 203.0.113.2 nginx
 
-# curl the ip from any other place (assuming this is a public ip block duh)
+# curl hacia la ip desde cualquier otro lugar (dando por hecho que es una ip pÃºblica hehe)
 $ curl 203.0.113.2
 ```
 
-## Registry & Repository
+## Registry y Repositorios
 
-A repository is a *hosted* collection of tagged images that together create the file system for a container.
+(Nota de traducciÃ³n: Registry serÃ­a traducido como Regitro, pero nadie le llama asÃ­ en el mundo real, asÃ­ que...)
 
-A registry is a *host* -- a server that stores repositories and provides an HTTP API for [managing the uploading and downloading of repositories](https://docs.docker.com/engine/tutorials/dockerrepos/).
+Un repositorio es una colecciÃ³n *alojada* de imÃ¡genes enlazadas que unidas crean el sistema de ficheros para un contenedor.
 
-Docker.com hosts its own [index](https://hub.docker.com/) to a central registry which contains a large number of repositories.  Having said that, the central docker registry [does not do a good job of verifying images](https://titanous.com/posts/docker-insecurity) and should be avoided if you're worried about security.
+Un Registry es un *alojamiento* -- un servidor que almacena repositorios y provee de una API HTTP para [gestionar la actualizaciÃ³n y descarga de repositorios](https://docs.docker.com/engine/tutorials/dockerrepos/).
 
-* [`docker login`](https://docs.docker.com/engine/reference/commandline/login) to login to a registry.
-* [`docker logout`](https://docs.docker.com/engine/reference/commandline/logout) to logout from a registry.
-* [`docker search`](https://docs.docker.com/engine/reference/commandline/search) searches registry for image.
-* [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull) pulls an image from registry to local machine.
-* [`docker push`](https://docs.docker.com/engine/reference/commandline/push) pushes an image to the registry from local machine.
+Docker.com posee su propio [Ã­ndice](https://hub.docker.com) como un Registry centralizado que contiene un gran nÃºmero de repositorios. Dicho esto, aclarar que el docker Registry [no hace un buen trabajo verificando imÃ¡genes](https://titanous.com/posts/docker-insecurity), por lo que quizÃ¡s deberÃ­as evitarlo si te preocupa la seguridad.
 
-### Run local registry
+* [`docker login`](https://docs.docker.com/engine/reference/commandline/login) para loguear en un registry.
+* [`docker logout`](https://docs.docker.com/engine/reference/commandline/logout) para desloguear de un registry.
+* [`docker search`](https://docs.docker.com/engine/reference/commandline/search) busca en el registry por una imÃ¡gen.
+* [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull) recupera una imÃ¡gen del registry a local.
+* [`docker push`](https://docs.docker.com/engine/reference/commandline/push) sube una imÃ¡gen local al registry.
 
-You can run a local registry by using the [docker distribution](https://github.com/docker/distribution) project and looking at the [local deploy](https://github.com/docker/docker.github.io/blob/master/registry/deploying.md) instructions.
+### Ejecutar un registry local
 
-Also see the [mailing list](https://groups.google.com/a/dockerproject.org/forum/#!forum/distribution).
+Puedes ejecutar un registry local utilizando el proyecto [distribuciÃ³n de docker](https://github.com/docker/distribution) y revisando las instrucciones de como realizar el [deploy local](https://github.com/docker/docker.github.io/blob/master/registry/deploying.md)
+
+Adicionalmente revisa la [mailing list](https://groups.google.com/a/dockerproject.org/forum/#!forum/distribution)
 
 ## Dockerfile
 
-[The configuration file](https://docs.docker.com/engine/reference/builder/). Sets up a Docker container when you run `docker build` on it. Vastly preferable to `docker commit`.  
+[El archivo de configuraciÃ³n](https://docs.docker.com/engine/reference/builder/). Configura un contenedor de docker al ejecutar `docker build` en el. Mucho mÃ¡s preferible a `docker commit`.
 
-Here are some common text editors and their syntax highlighting modules you could use to create Dockerfiles:
+AquÃ­ tienes varios editores de textos comunes y mÃ³dulos de resaltado de sintaxis que puedes usar para crear Dockerfiles:
 
-* If you use [jEdit](http://jedit.org), I've put up a syntax highlighting module for [Dockerfile](https://github.com/wsargent/jedit-docker-mode) you can use.
+* Si utilizas [jEdit](http://jedit.org), puedes hacer uso del mÃ³dulo de resaltado de sintaxis para [Dockerfile](https://github.com/wsargent/jedit-docker-mode).
 * [Sublime Text 2](https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting)
 * [Atom](https://atom.io/packages/language-docker)
 * [Vim](https://github.com/ekalinin/Dockerfile.vim)
 * [Emacs](https://github.com/spotify/dockerfile-mode)
 * [TextMate](https://github.com/docker/docker/tree/master/contrib/syntax/textmate)
 * [VS Code](https://github.com/Microsoft/vscode-docker)
-* Also see [Docker meets the IDE](https://domeide.github.io/)
+* Revisa [Docker meets the IDE](https://domeide.github.io/)
 
 ### Instructions
 
 * [.dockerignore](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
-* [FROM](https://docs.docker.com/engine/reference/builder/#from) Sets the Base Image for subsequent instructions.
-* [MAINTAINER (deprecated - use LABEL instead)](https://docs.docker.com/engine/reference/builder/#maintainer-deprecated) Set the Author field of the generated images.
-* [RUN](https://docs.docker.com/engine/reference/builder/#run) execute any commands in a new layer on top of the current image and commit the results.
-* [CMD](https://docs.docker.com/engine/reference/builder/#cmd) provide defaults for an executing container.
-* [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose) informs Docker that the container listens on the specified network ports at runtime.  NOTE: does not actually make ports accessible.
-* [ENV](https://docs.docker.com/engine/reference/builder/#env) sets environment variable.
-* [ADD](https://docs.docker.com/engine/reference/builder/#add) copies new files, directories or remote file to container.  Invalidates caches. Avoid `ADD` and use `COPY` instead.
-* [COPY](https://docs.docker.com/engine/reference/builder/#copy) copies new files or directories to container.  By default this copies as root regardless of the USER/WORKDIR settings.  Use `--chown=<user>:<group>` to give ownership to another user/group.  (Same for `ADD`.)
-* [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) configures a container that will run as an executable.
-* [VOLUME](https://docs.docker.com/engine/reference/builder/#volume) creates a mount point for externally mounted volumes or other containers.
-* [USER](https://docs.docker.com/engine/reference/builder/#user) sets the user name for following RUN / CMD / ENTRYPOINT commands.
-* [WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir) sets the working directory.
-* [ARG](https://docs.docker.com/engine/reference/builder/#arg) defines a build-time variable.
-* [ONBUILD](https://docs.docker.com/engine/reference/builder/#onbuild) adds a trigger instruction when the image is used as the base for another build.
-* [STOPSIGNAL](https://docs.docker.com/engine/reference/builder/#stopsignal) sets the system call signal that will be sent to the container to exit.
-* [LABEL](https://docs.docker.com/config/labels-custom-metadata/) apply key/value metadata to your images, containers, or daemons.
-* [SHELL](https://docs.docker.com/engine/reference/builder/#shell) override default shell is used by docker to run commands.
-* [HEALTHCHECK](https://docs.docker.com/engine/reference/builder/#healthcheck) tells docker how to test a container to check that it is still working.
+* [FROM](https://docs.docker.com/engine/reference/builder/#from) utiliza una imÃ¡gen de base para las siguientes instrucciones.
+* [MAINTAINER (deprecated - use LABEL instead)](https://docs.docker.com/engine/reference/builder/#maintainer-deprecated) especifica el autor que ha generado las imÃ¡genes.
+* [RUN](https://docs.docker.com/engine/reference/builder/#run) ejecuta cualquier comando en una nueva capa de la imÃ¡gen y guarda el estado resultante.
+* [CMD](https://docs.docker.com/engine/reference/builder/#cmd) proporcionar valores predeterminados para un contenedor en ejecuciÃ³n.
+* [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose) informa a Docker que el contenedor estarÃ¡ escuchando los puertos especificados mientras se ejecute. NOTA: no hace que los puertos sean accesibles.
+* [ENV](https://docs.docker.com/engine/reference/builder/#env) define una variable de entorno.
+* [ADD](https://docs.docker.com/engine/reference/builder/#add) copia nuevos ficheros, directorios o archivos remotos al contenedor. Invalida cachÃ©s. Procura evitar usar `ADD` e intenta utilizar `COPY` en su lugar.
+* [COPY](https://docs.docker.com/engine/reference/builder/#copy) copia nuevos ficheros o directorios al contenedor. Por defecto los copia como *root* independientemente de la configuraciÃ³n de USER/WORKDIR. Utiliza `--chown=<user>:<group>` para cambiar el dueÃ±o. (Lo mismo aplica a `ADD`).
+* [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) configura un contenedor que funcionarÃ¡ como ejecutable.
+* [VOLUME](https://docs.docker.com/engine/reference/builder/#volume) crea un punto de montaje para volÃºmenes externos u otros contenedores.
+* [USER](https://docs.docker.com/engine/reference/builder/#user) especifica el usuario que ejecutarÃ¡ los prÃ³ximos comandos de tipo RUN / CMD / ENTRYPOINTS.
+* [WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir) especifica el directorio de trabajo.
+* [ARG](https://docs.docker.com/engine/reference/builder/#arg) define una variable que estarÃ¡ disponible durante el build.
+* [ONBUILD](https://docs.docker.com/engine/reference/builder/#onbuild) aÃ±ade una instrucciÃ³n que serÃ¡ lanzada cuando la imÃ¡gen sea utilizada como base de otro build.
+* [STOPSIGNAL](https://docs.docker.com/engine/reference/builder/#stopsignal) define la seÃ±al que serÃ¡ enviada al contenedor para detenerse.
+* [LABEL](https://docs.docker.com/config/labels-custom-metadata/) aplica metadatos de clave/valor para las imÃ¡genes, contenedores o daemons (servicios).
+* [SHELL](https://docs.docker.com/engine/reference/builder/#shell) reemplaza la shell por defecto que es utilizada por Docker para ejecutar los comandos.
+* [HEALTHCHECK](https://docs.docker.com/engine/reference/builder/#healthcheck) indica a docker como probar el contenedor para revisar que sigue funcionando.
 
 ### Tutorial
 
@@ -414,37 +424,38 @@ Here are some common text editors and their syntax highlighting modules you coul
 
 ### Examples
 
-* [Examples](https://docs.docker.com/engine/reference/builder/#dockerfile-examples)
-* [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
-* [Michael Crosby](http://crosbymichael.com/) has some more [Dockerfiles best practices](http://crosbymichael.com/dockerfile-best-practices.html) / [take 2](http://crosbymichael.com/dockerfile-best-practices-take-2.html).
-* [Building Good Docker Images](http://jonathan.bergknoff.com/journal/building-good-docker-images) / [Building Better Docker Images](http://jonathan.bergknoff.com/journal/building-better-docker-images)
-* [Managing Container Configuration with Metadata](https://speakerdeck.com/garethr/managing-container-configuration-with-metadata)
-* [How to write excellent Dockerfiles](https://rock-it.pl/how-to-write-excellent-dockerfiles/)
+* [Ejemplos](https://docs.docker.com/engine/reference/builder/#dockerfile-examples)
+* [Buenas prÃ¡cticas para escribir Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
+* [Michael Crosby](http://crosbymichael.com/) tiene mÃ¡s consejos de [buenas prÃ¡cticas para Dockerfile](http://crosbymichael.com/dockerfile-best-practices.html) / [toma 2](http://crosbymichael.com/dockerfile-best-practices-take-2.html).
+* [Construyendo buenas imÃ¡genes de Docker](http://jonathan.bergknoff.com/journal/building-good-docker-images) / [Construyendo mejores imÃ¡genes de Docker](http://jonathan.bergknoff.com/journal/building-better-docker-images)
+* [Gestionando la configuraciÃ³n de un contenedor utilizando metadatos](https://speakerdeck.com/garethr/managing-container-configuration-with-metadata)
+* [CÃ³mo escribir excelentes Dockerfiles](https://rock-it.pl/how-to-write-excellent-dockerfiles/)
 
-## Layers
+## Capas
 
-The versioned filesystem in Docker is based on layers. They're like [git commits or changesets for filesystems](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/).
+Las veriones de los sitemas de ficheros en docker se basan en capas. Son similares a los [git commits o conjuntos de cambios para sistemas de ficheros](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/).
 
-## Links
+## Enlaces
 
-Links are how Docker containers talk to each other [through TCP/IP ports](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/). [Atlassian](https://blogs.atlassian.com/2013/11/docker-all-the-things-at-atlassian-automation-and-wiring/) show worked examples. You can also resolve [links by hostname](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/#/updating-the-etchosts-file).
+Los enlaces definen como los contenedores de Docker se comunican entre ellos [mediante puertos TCP/IP](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/). [Atlassian](https://blogs.atlassian.com/2013/11/docker-all-the-things-at-atlassian-automation-and-wiring/) lo explica con ejemplos. TambiÃ©n puedes resolver [enlaces con nombres de equipo](https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/#/updating-the-etchosts-file).
 
-This has been deprecated to some extent by [user-defined networks](https://docs.docker.com/network/).
+Esto ha sido parcialmente deprecado por [redes definidas por los usuarios](https://docs.docker.com/network/).
 
-NOTE: If you want containers to ONLY communicate with each other through links, start the docker daemon with `-icc=false` to disable inter process communication.
+NOTA: Si ÃšNICAMENTE quieres que los contenedores se comuniquen mediante enlaces, inicia el servicio de Docker con `-icc=false` para desactivar la comunicaciÃ³n entre procesos.
 
-If you have a container with the name CONTAINER (specified by `docker run --name CONTAINER`) and in the Dockerfile, it has an exposed port:
+Si tienes un contenedor con el nombre CONTAINER (especificado vÃ­a `docker run --name CONTAINER`) y, en el Dockerfile, explones un puerto:
 
 ```
 EXPOSE 1337
 ```
 
-Then if we create another container called LINKED like so:
+Y entonces creas otro contenedor llamado LINKED de la forma:
 
 ```sh
 docker run -d --link CONTAINER:ALIAS --name LINKED user/wordpress
 ```
 
+Entonces los puertos expuertos y alias de CONTAINER se mostrarÃ¡n en LINKED con las siguientes variables de entorno:
 Then the exposed ports and aliases of CONTAINER will show up in LINKED with the following environment variables:
 
 ```sh
@@ -452,73 +463,73 @@ $ALIAS_PORT_1337_TCP_PORT
 $ALIAS_PORT_1337_TCP_ADDR
 ```
 
-And you can connect to it that way.
+Y te puedes conectar a Ã©l de esta forma.
 
-To delete links, use `docker rm --link`.
+Para eliminar los enlaces, utiliza `docker rm --link'.
 
-Generally, linking between docker services is a subset of "service discovery", a big problem if you're planning to use Docker at scale in production.  Please read [The Docker Ecosystem: Service Discovery and Distributed Configuration Stores](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-service-discovery-and-distributed-configuration-stores) for more info.
+Generalmente, enlazar mediante servicios de docker es un subgrupo de "descrubrimiento de servicios", un gran problema si tienes pensado utilizar Docker para escalar en producciÃ³n. Por favor, lee [The Docker Ecosystem: Service Discovery and Distributed Configuration Stores](https://www.digitalocean.com/community/tutorials/the-docker-ecosystem-service-discovery-and-distributed-configuration-stores) para mÃ¡s informaciÃ³n.
 
-## Volumes
+## VolÃºmenes
 
-Docker volumes are [free-floating filesystems](https://docs.docker.com/engine/tutorials/dockervolumes/). They don't have to be connected to a particular container. You can use volumes mounted from [data-only containers](https://medium.com/@ramangupta/why-docker-data-containers-are-good-589b3c6c749e) for portability. As of Docker 1.9.0, Docker has named volumes which replace data-only containers. Consider using named volumes to implement it rather than data containers.
+Los volÃºmenes de Docker son [sitemas de archivos flotantes](https://docs.docker.com/engine/tutorials/dockervolumes/). Estos no se conectan a un contenedor en particular. Puedes utilizar los volÃºmenes montados de [contenedores de Ãºnicamente datos](https://medium.com/@ramangupta/). A partir de Docker 1.9.0, Docker ha nombrado volÃºmenes que reemplazan los contenedores de solo datos. Considere usar volÃºmenes con nombre para implementarlo en lugar de contenedores de datos.
 
-### Lifecycle
+
+### Ciclo de vida
 
 * [`docker volume create`](https://docs.docker.com/engine/reference/commandline/volume_create/)
 * [`docker volume rm`](https://docs.docker.com/engine/reference/commandline/volume_rm/)
 
-### Info
+### InformaciÃ³n
 
 * [`docker volume ls`](https://docs.docker.com/engine/reference/commandline/volume_ls/)
 * [`docker volume inspect`](https://docs.docker.com/engine/reference/commandline/volume_inspect/)
 
-Volumes are useful in situations where you can't use links (which are TCP/IP only). For instance, if you need to have two docker instances communicate by leaving stuff on the filesystem.
+Los volÃºmenes son Ãºtiles en situaciones donde no puedes utilizar enlaces (los cuales son sÃ³lo TCP/IP). Por ejemplo, si necesitases tener dos instancias de docker comunicÃ¡ndose dejando datos en el sistema de ficheros.
 
-You can mount them in several docker containers at once, using `docker run --volumes-from`.
+Puedes montarlos en distintos contenedores de docker a la vez, utilizando `docker run --volumes-from`.
 
-Because volumes are isolated filesystems, they are often used to store state from computations between transient containers. That is, you can have a stateless and transient container run from a recipe, blow it away, and then have a second instance of the transient container pick up from where the last one left off.
+Dadp que los volÃºmenes estÃ¡n aislados del sistema de ficheros, estos tambiÃ©n son utilizados para almacenar el estado a partir de cÃ¡lculos de contenedores temporales. Exacto, puedes tener un contenedor sin estado y temporal ejecutÃ¡ndose a partir de una receta,  destruÃ­rlo, y entonecs tener otra instancia temporal que pueda recuperar lo que ha dejado atrÃ¡s el primer contenedor.
 
-See [advanced volumes](http://crosbymichael.com/advanced-docker-volumes.html) for more details. [Container42](http://container42.com/2014/11/03/docker-indepth-volumes/) is also helpful.
+Revisa [volÃºmenes avanzados](http://crosbymichael.com/advanced-docker-volumes.html) para mÃ¡s informaciÃ³n. [Container42](http://container42.com/2014/11/03/docker-indepth-volumes/) tambiÃ©n es de utilidad.
 
-You can [map MacOS host directories as docker volumes](https://docs.docker.com/engine/tutorials/dockervolumes/#mount-a-host-directory-as-a-data-volume):
+Puedes [mapear directorios de MacOS como volÃºmenes de Docker](https://docs.docker.com/engine/tutorials/dockervolumes/#mount-a-host-directory-as-a-data-volume):
 
 ```sh
 docker run -v /Users/wsargent/myapp/src:/src
 ```
 
-You can use remote NFS volumes if you're [feeling brave](https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-shared-storage-volume-as-a-data-volume).
+Puedes utilizar un volÃºmen NFS remoto si [eres valiente](https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-shared-storage-volume-as-a-data-volume)
 
-You may also consider running data-only containers as described [here](http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/) to provide some data portability.
+TambiÃ©n puedes plantearme utilizar contenedores de solo datos como se describen [aquÃ­](http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/) para tener portabilidad de datos.
 
-Be aware that you can [mount files as volumes](#volumes-can-be-files).
+Ten en cuenta que puedes montar [archivos como volÃºmenes](#volumes-can-be-files).
 
-## Exposing ports
+## Exponiendo puertos
 
-Exposing incoming ports through the host container is [fiddly but doable](https://docs.docker.com/engine/reference/run/#expose-incoming-ports).
+Exponer puertos de entrada a travÃ©s de un contenedor es [complejo pero factible](https://docs.docker.com/engine/reference/run/#expose-incoming-ports).
 
-This is done by mapping the container port to the host port (only using localhost interface) using `-p`:
+Puede hacerse a travÃ©s del mapeo de puertos del contenedor hacia el host (utilizando Ãºnicamente la interficie de localhost) mediante el uso de `p`:
 
 ```sh
 docker run -p 127.0.0.1:$HOSTPORT:$CONTAINERPORT \
   --name CONTAINER \
-  -t someimage
+  -t algunaimÃ¡gen
 ```
-
-You can tell Docker that the container listens on the specified network ports at runtime by using [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose):
+Puedes decirle a docker que el contenedor escucha en el puerto especificado utilizando [EXPOSE](https://docs.docker.com/engine/reference/builder/#expose):
 
 ```Dockerfile
 EXPOSE <CONTAINERPORT>
 ```
 
-Note that `EXPOSE` does not expose the port itself - only `-p` will do that. 
+NÃ³tese que `EXPOSE` no expone el puerto por si mismo - solo `-p` lo hace.
 
-To expose the container's port on your localhost's port, run:
+Para exponer el puerto de un contenedor en localhost, ejecuta:
 
 ```sh
 iptables -t nat -A DOCKER -p tcp --dport <LOCALHOSTPORT> -j DNAT --to-destination <CONTAINERIP>:<PORT>
 ```
 
-If you're running Docker in Virtualbox, you then need to forward the port there as well, using [forwarded_port](https://docs.vagrantup.com/v2/networking/forwarded_ports.html). Define a range of ports in your Vagrantfile like this so you can dynamically map them:
+Si estÃ¡s ejecutando Docker en Virtualbox, tambiÃ©n necesitarÃ¡s hacer forward del puerto, utilizando [forwarded_port] (https://docs.vagrantup.com/v2/networking/forwarded_ports.html). Define un rango de puertos en tu Vagrantfile de la siguiente manera para mapearlos dinÃ¡micamente:
 
 ```
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -532,137 +543,140 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 end
 ```
 
-If you forget what you mapped the port to on the host container, use `docker port` to show it:
+Si te olvidas de los puertos que has mapeado, utiliza `docker port` para mostrarlo:
 
 ```sh
 docker port CONTAINER $CONTAINERPORT
 ```
 
-## Best Practices
+## Buenas prÃ¡cticas
 
-This is where general Docker best practices and war stories go:
+AquÃ­ tienes algunas buenas prÃ¡cticas de Docker y algunas batallitas:
 
 * [The Rabbit Hole of Using Docker in Automated Tests](http://gregoryszorc.com/blog/2014/10/16/the-rabbit-hole-of-using-docker-in-automated-tests/)
 * [Bridget Kromhout](https://twitter.com/bridgetkromhout) has a useful blog post on [running Docker in production](http://sysadvent.blogspot.co.uk/2014/12/day-1-docker-in-production-reality-not.html) at Dramafever.
-* There's also a best practices [blog post](http://developers.lyst.com/devops/2014/12/08/docker/) from Lyst.
+* TambiÃ©n tienes buenas prÃ¡cticas en este [post](http://developers.lyst.com/devops/2014/12/08/docker/) de Lyst.
 * [Building a Development Environment With Docker](https://tersesystems.com/2013/11/20/building-a-development-environment-with-docker/)
 * [Discourse in a Docker Container](https://samsaffron.com/archive/2013/11/07/discourse-in-a-docker-container)
 
 ## Docker-Compose
 
-Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration. To learn more about all the features of Compose, see the [list of features](https://docs.docker.com/compose/overview/#features).
+Compose es una herramienta para definir y ejecutar varias aplicaciones en contenedores de Docker. Con Compose, utilizas un archivo YAML para configurar tus servicios. Entonces, con un Ãºnico comando, creas e inicias todos los servicios desde tus configuraciones. Para aprender mÃ¡s sobre las caracterÃ­sticas de Compose, revisa la [lista de caracterÃ­sticas](https://docs.docker.com/compose/overview/#features).
 
-By using the following command you can start up your application:
+Utilizando el siguiente comando puedes iniciar tu aplicaciÃ³n:
 
 ```sh
 docker-compose -f <docker-compose-file> up
 ```
 
-You can also run docker-compose in detached mode using -d flag, then you can stop it whenever needed by the following command:
+TambiÃ©n puedes ejecutar docker-compose en segundo plano utilizando el parÃ¡mentro -d, entonces podrÃ¡s detenerlo cuando lo necesitas con el comando:
 
 ```sh
 docker-compose stop
 ```
 
-You can bring everything down, removing the containers entirely, with the down command. Pass `--volumes` to also remove the data volume.
+Puedes tirarlo todo, eliminando los contenedores completamente, con el comando down. Utiliza el parÃ¡metro `--volumes` para tambiÃ©n eliminar los volÃºmenes de datos.
 
-## Security
+## Seguridad
 
-This is where security tips about Docker go. The Docker [security](https://docs.docker.com/engine/security/security/) page goes into more detail.
+AquÃ­ te dejamos algunso consejos de seguridad sobre como funciona Docker. La pÃ¡gina de Docker de [seguridad]](https://docs.docker.com/engine/security/security/) lo explica en mÃ¡s detalle.
 
-First things first: Docker runs as root. If you are in the `docker` group, you effectively [have root access](https://web.archive.org/web/20161226211755/http://reventlov.com/advisories/using-the-docker-command-to-root-the-host). If you expose the docker unix socket to a container, you are giving the container [root access to the host](https://www.lvh.io/posts/dont-expose-the-docker-socket-not-even-to-a-container/).
+Lo primero: Docker se ejecuta como root. Si estÃ¡s en el grupo `docker`, [tienes acceso root](https://web.archive.org/web/20161226211755/http://reventlov.com/advisories/using-the-docker-command-to-root-the-host). Si expones el socket de unix de docker a un contenedor, le estÃ¡s dando al contenedor acceso [root a la mÃ¡quina host](https://www.lvh.io/posts/dont-expose-the-docker-socket-not-even-to-a-container/).
 
-Docker should not be your only defense. You should secure and harden it.
 
-For an understanding of what containers leave exposed, you should read [Understanding and Hardening Linux Containers](https://www.nccgroup.trust/globalassets/our-research/us/whitepapers/2016/april/ncc_group_understanding_hardening_linux_containers-1-1.pdf) by [Aaron Grattafiori](https://twitter.com/dyn___). This is a complete and comprehensive guide to the issues involved with containers, with a plethora of links and footnotes leading on to yet more useful content. The security tips following are useful if you've already hardened containers in the past, but are not a substitute for understanding.
+Docker no deberÃ­a ser tu Ãºnica defensa. DeberÃ­as asegurarlo y protejerlo.
 
-### Security Tips
+Para entender como se exponen los contenedores, deberÃ­as leer [Entendiendo y endureciendo Contenedores Linux](https://www.nccgroup.trust/globalassets/our-research/us/whitepapers/2016/april/ncc_group_understanding_hardening_linux_containers-1-1.pdf) de [Aaron Grattafiori](https://twitter.com/dyn___). Esta es una guÃ­a completa y entendible sobre los riesgos relacionados con los contenedores, con una gran cantidad de enlaces y notas a piÃ© de pÃ¡gina. Los siguientes consejos de seguridad son Ãºtiles si ya has protejido tus contenedores en el pasado, pero no son substitutos a entenderlo. 
 
-For greatest security, you want to run Docker inside a virtual machine. This is straight from the Docker Security Team Lead -- [slides](http://www.slideshare.net/jpetazzo/linux-containers-lxc-docker-and-security) / [notes](http://www.projectatomic.io/blog/2014/08/is-it-safe-a-look-at-docker-and-security-from-linuxcon/). Then, run with AppArmor / seccomp / SELinux / grsec etc to [limit the container permissions](http://linux-audit.com/docker-security-best-practices-for-your-vessel-and-containers/). See the [Docker 1.10 security features](https://blog.docker.com/2016/02/docker-engine-1-10-security/) for more details.
+### Consejos de seguridad
 
-Docker image ids are [sensitive information](https://medium.com/@quayio/your-docker-image-ids-are-secrets-and-its-time-you-treated-them-that-way-f55e9f14c1a4) and should not be exposed to the outside world. Treat them like passwords.
+Para mayor seguridad, puedes ejecutar Docker dentro de una mÃ¡quina virtual. Esto es un consejo del Jefe del Equipo de Seguridad de Docker -- [diapositivas](http://www.slideshare.net/jpetazzo/linux-containers-lxc-docker-and-security) / [notas](http://www.projectatomic.io/blog/2014/08/is-it-safe-a-look-at-docker-and-security-from-linuxcon/). Entonces, ejecutalo con AppArmor / seccomp / SELinux /grsec etc. para [limitar los permisos del contenedor](http://linux-audit.com/docker-security-best-practices-for-your-vessel-and-containers/). Revisa [las caracterÃ­sticas de seguridad de Docker 1.10](https://blog.docker.com/2016/02/docker-engine-1-10-security/) para mÃ¡s detalles.
 
-See the [Docker Security Cheat Sheet](https://github.com/konstruktoid/Docker/blob/master/Security/CheatSheet.adoc) by [Thomas Sjögren](https://github.com/konstruktoid): some good stuff about container hardening in there.
+Los identificadores de las imÃ¡genes de Docker son [informaciÃ³n sensible](https://medium.com/@quayio/your-docker-image-ids-are-secrets-and-its-time-you-treated-them-that-way-f55e9f14c1a4) y no deberÃ­an exponerse al mundo exterior. TrÃ¡talos como contraseÃ±as.
 
-Check out the [docker bench security script](https://github.com/docker/docker-bench-security), download the [white papers](https://blog.docker.com/2015/05/understanding-docker-security-and-best-practices/).
+Revisa la [Chuleta de Seguridad de Docker](https://github.com/konstruktoid/Docker/blob/master/Security/CheatSheet.adoc) de [Thomas SjÃ¶gren](https://github.com/konstruktoid): ahÃ­ podrÃ¡s encontrar buenos consejos sobre como protejerse.
 
-Snyk's [10 Docker Image Security Best Practices cheat sheet](https://snyk.io/blog/10-docker-image-security-best-practices/)
+Revisa el [script de seguridad de Docker Bench](https://github.com/docker/docker-bench-security).
 
-You should start off by using a kernel with unstable patches for grsecurity / pax compiled in, such as [Alpine Linux](https://en.wikipedia.org/wiki/Alpine_Linux). If you are using grsecurity in production, you should spring for [commercial support](https://grsecurity.net/business_support.php) for the [stable patches](https://grsecurity.net/announce.php), same as you would do for RedHat. It's $200 a month, which is nothing to your devops budget.
 
-Since docker 1.11 you can easily limit the number of active processes running inside a container to prevent fork bombs. This requires a linux kernel >= 4.3 with CGROUP_PIDS=y to be in the kernel configuration.
+[Las 10 Mejores PrÃ¡cticas de Seguridad para ImÃ¡genes de Docker](https://snyk.io/blog/10-docker-image-security-best-practices/) de Snyk
+
+Puedes empezar utilizando un Kernel con parches inestables de *grsecurity* / *pax* compilados, como [Alpine Linux](https://en.wikipedia.org/wiki/Alpine_Linux). Si haces uso de *grsecurity* en producciÃ³n, deberÃ­as buscar [soporte comercial](https://grsecurity.net/business_support.php) para los [parches estables](https://grsecurity.net/announce.php), de la misma forma que deberÃ­as hacer para RedHat. Son unos 200$ al mes, lo cual es insignificante para el presupuesto de devops.
+
+A partir de Docker 1.11, puedes limitar fÃ¡cilmente el nÃºmero de procesos que se ejecutan en un contenedor para evitar *fork bombs*. Esto requiere utilizar un Kernel de Linux >= 4.3 con CGROUP_PIDS=y en la configuraciÃ³n del kernel.
 
 ```sb
 docker run --pids-limit=64
 ```
 
-Also available since docker 1.11 is the ability to prevent processes from gaining new privileges. This feature have been in the linux kernel since version 3.5. You can read more about it in [this](http://www.projectatomic.io/blog/2016/03/no-new-privs-docker/) blog post.
+A partir de Docker 1.11 tambiÃ©n estÃ¡ disponible la posibilidad de evitar que los procesos ganen nuevos privilegios. Esta caracterÃ­stica estÃ¡ en el Kernel de Linux desde la versiÃ³n 3.5. Puedes leer mÃ¡s al respecto en [este](http://www.projectatomic.io/blog/2016/03/no-new-privs-docker/) blog.
 
 ```sh
 docker run --security-opt=no-new-privileges
 ```
 
-From the [Docker Security Cheat Sheet](http://container-solutions.com/content/uploads/2015/06/15.06.15_DockerCheatSheet_A2.pdf) (it's in PDF which makes it hard to use, so copying below) by [Container Solutions](http://container-solutions.com/is-docker-safe-for-production/):
+De la [Chuleta de Seguridad de Docker](http://container-solutions.com/content/uploads/2015/06/15.06.15_DockerCheatSheet_A2.pdf) (es un PDF y es un poco complejo de usar, asÃ­ que mejor copia de abajo) de [Container Solutions](http://container-solutions.com/is-docker-safe-for-production/):
 
-Turn off interprocess communication with:
+Desactiva la comunicaciÃ³n interproceso con:
 
 ```sh
 docker -d --icc=false --iptables
 ```
 
-Set the container to be read-only:
+Establece que el contenedor sea solo lectura:
 
 ```sh
 docker run --read-only
 ```
 
-Verify images with a hashsum:
+Verifica las imÃ¡genes con un *hashsum*:
 
 ```sh
 docker pull debian@sha256:a25306f3850e1bd44541976aa7b5fd0a29be
 ```
 
-Set volumes to be read only:
+Establece el volÃºmen como solo lectura:
 
 ```sh
 docker run -v $(pwd)/secrets:/secrets:ro debian
 ```
 
-Define and run a user in your Dockerfile so you don't run as root inside the container:
+Crea y utiliza un usiario en el Dockerfile para evitar ejecutar como root dentro del contenedor: 
 
 ```Dockerfile
 RUN groupadd -r user && useradd -r -g user user
 USER user
 ```
 
-### User Namespaces
+### Espacio de Nombres del Usuario (*User Namespaces*)
 
-There's also work on [user namespaces](https://s3hh.wordpress.com/2013/07/19/creating-and-using-containers-without-privilege/) -- it is in 1.10 but is not enabled by default.
+TambiÃ©n hay que trabajar con los [espacios de nombres de usuario](https://s3hh.wordpress.com/2013/07/19/creating-and-using-containers-without-privilege/) -- disponibles en la 1.10, pero no activados por defecto.
 
-To enable user namespaces ("remap the userns") in Ubuntu 15.10, [follow the blog example](https://raesene.github.io/blog/2016/02/04/Docker-User-Namespaces/).
+Para activar esta caracterÃ­stica ("reasignar los usuarios") en ubuntu 15.10, [sigue este ejemplo](https://raesene.github.io/blog/2016/02/04/Docker-User-Namespaces/).
 
-### Security Videos
+### Videos de Seguridad
 
 * [Using Docker Safely](https://youtu.be/04LOuMgNj9U)
 * [Securing your applications using Docker](https://youtu.be/KmxOXmPhZbk)
 * [Container security: Do containers actually contain?](https://youtu.be/a9lE9Urr6AQ)
 * [Linux Containers: Future or Fantasy?](https://www.youtube.com/watch?v=iN6QbszB1R8)
 
-### Security Roadmap
+### Ruta de Seguridad
 
-The Docker roadmap talks about [seccomp support](https://github.com/docker/docker/blob/master/ROADMAP.md#11-security).
-There is an AppArmor policy generator called [bane](https://github.com/jfrazelle/bane), and they're working on [security profiles](https://github.com/docker/docker/issues/17142).
+La ruta de Docker habla sobre [el soporte de *seccomp*](https://github.com/docker/docker/blob/master/ROADMAP.md#11-security).
 
-## Tips
+TambiÃ©n hay una polÃ­tica de AppArmor llamada [base](https://github.com/jfrazelle/bane), y estÃ¡n trabajando en [perfiles de seguridad](https://github.com/docker/docker/issues/17142)
 
-Sources:
+## Consejos
+
+Fuentes:
 
 * [15 Docker Tips in 5 minutes](http://sssslide.com/speakerdeck.com/bmorearty/15-docker-tips-in-5-minutes)
 * [CodeFresh Everyday Hacks Docker](https://codefresh.io/blog/everyday-hacks-docker/)
 
 ### Prune
 
-The new [Data Management Commands](https://github.com/docker/docker/pull/26108) have landed as of Docker 1.13:
+Los nuevos [Comandos de manejo de datos](https://github.com/docker/docker/pull/26108) llegaron a Docker en la versiÃ³n 1.13
 
 * `docker system prune`
 * `docker volume prune`
@@ -672,7 +686,7 @@ The new [Data Management Commands](https://github.com/docker/docker/pull/26108) 
 
 ### df
 
-`docker system df` presents a summary of the space currently used by different docker objects.
+`docker system df` muestra un resumen del espacio actualmente utilizado por los distintos elementos de Docker.
 
 ### Heredoc Docker Container
 
@@ -683,7 +697,7 @@ RUN apk --no-cache add htop
 EOF
 ```
 
-### Last IDs
+### Ãšltimas IDs
 
 ```sh
 alias dl='docker ps -l -q'
@@ -691,213 +705,213 @@ docker run ubuntu echo hello world
 docker commit $(dl) helloworld
 ```
 
-### Commit with command (needs Dockerfile)
+### Commit con comando (necesita de Dockerfile)
 
 ```sh
 docker commit -run='{"Cmd":["postgres", "-too -many -opts"]}' $(dl) postgres
 ```
 
-### Get IP address
+### Recuperar la direcciÃ³n IP
 
 ```sh
 docker inspect $(dl) | grep -wm1 IPAddress | cut -d '"' -f 4
 ```
 
-Or with [jq](https://stedolan.github.io/jq/) installed:
+O, con [jq](https://stedolan.github.io/jq/) instalado:
 
 ```sh
 docker inspect $(dl) | jq -r '.[0].NetworkSettings.IPAddress'
 ```
 
-Or using a [go template](https://docs.docker.com/engine/reference/commandline/inspect):
+O, utilizando una [plantilla](https://docs.docker.com/engine/reference/commandline/inspect):
 
 ```sh
 docker inspect -f '{{ .NetworkSettings.IPAddress }}' <container_name>
 ```
 
-Or when building an image from Dockerfile, when you want to pass in a build argument:
+O, al construir la imÃ¡gen desde un Dockerfile, cuando quieres pasar argumentos de compilaciÃ³n:
 
 ```sh
 DOCKER_HOST_IP=`ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1`
 echo DOCKER_HOST_IP = $DOCKER_HOST_IP
 docker build \
-  --build-arg ARTIFACTORY_ADDRESS=$DOCKER_HOST_IP 
+  --build-arg ARTIFACTORY_ADDRESS=$DOCKER_HOST_IP
   -t sometag \
   some-directory/
 ```
 
-### Get port mapping
+### Recuperar el mapping de puertos
 
 ```sh
-docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' <containername>
+docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' <nombredecontenedor>
 ```
 
-### Find containers by regular expression
+### Encontrar contenedores mediante expresiones regulares
 
 ```sh
 for i in $(docker ps -a | grep "REGEXP_PATTERN" | cut -f1 -d" "); do echo $i; done
 ```
 
-### Get Environment Settings
+### Recuperar la configuraciÃ­n del entorno
 
 ```sh
 docker run --rm ubuntu env
 ```
 
-### Kill running containers
+### Detener los contenedores en funcionamiento
 
 ```sh
 docker kill $(docker ps -q)
 ```
 
-### Delete all containers (force!! running or stopped containers)
+### Eliminar todos los contenedores (Â¡FORZANDO! Los borrarÃ¡ estÃ©n funcionando o parados)
 
 ```sh
 docker rm -f $(docker ps -qa)
 ```
 
-### Delete old containers
+### Eliminar los viejos contenedores
 
 ```sh
 docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm
 ```
 
-### Delete stopped containers
+### Eliminar los contenedores detenidos
 
 ```sh
 docker rm -v $(docker ps -a -q -f status=exited)
 ```
 
-### Delete containers after stopping
+### Eliminar los contenedores despuÃ©s de pararlos
 
 ```sh
 docker stop $(docker ps -aq) && docker rm -v $(docker ps -aq)
 ```
 
-### Delete dangling images
+### Eliminar las imÃ¡genes colgadas
 
 ```sh
 docker rmi $(docker images -q -f dangling=true)
 ```
 
-### Delete all images
+### Eliminar todas las imÃ¡genes
 
 ```sh
 docker rmi $(docker images -q)
 ```
 
-### Delete dangling volumes
+### Eliminar los volÃºmenes colgados
 
-As of Docker 1.9:
+Como en Docker 1.9:
 
 ```sh
 docker volume rm $(docker volume ls -q -f dangling=true)
 ```
 
-In 1.9.0, the filter `dangling=false` does _not_ work - it is ignored and will list all volumes.
+En 1.90, el filtro `dangling=false` _no_ funciona - es ignorado y mostrarÃ¡ todos los volÃºmenes
 
-### Show image dependencies
+### Mostrar las dependencias de las imÃ¡genes
 
 ```sh
 docker images -viz | dot -Tpng -o docker.png
 ```
 
-### Slimming down Docker containers
+### Reducir el tamaÃ±o de los contenedores Docker
 
-- Cleaning APT in a `RUN` layer - This should be done in the same layer as other `apt` commands. Otherwise, the previous layers still persist the original information and your images will still be fat.
+- Limpiar el APT en una capa `RUN` - Esto deberÃ­a hacerse en la misma capa que los otros comandos `apt`. Sino, las capas previas seguirÃ¡n teniendo la informaciÃ³n original y la imÃ¡gen seguirÃ¡ siendo pesada.
     ```Dockerfile
     RUN {apt commands} \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     ```
-- Flatten an image
+- Aplanar una imÃ¡gen
     ```sh
     ID=$(docker run -d image-name /bin/bash)
-    docker export $ID | docker import – flat-image-name
+    docker export $ID | docker import â€“ flat-image-name
     ```
-- For backup
+- Para las copias de seguridad
     ```sh
     ID=$(docker run -d image-name /bin/bash)
     (docker export $ID | gzip -c > image.tgz)
     gzip -dc image.tgz | docker import - flat-image-name
     ```
 
-### Monitor system resource utilization for running containers
+### Monitorizar los recursos del sistema utilizados por los contenedores en funcionamiento
 
-To check the CPU, memory, and network I/O usage of a single container, you can use:
+Para revisar el uso de CPU, memoria y E/S de red para un solo contenedor, puedes utilizar:
 
 ```sh
 docker stats <container>
 ```
 
-For all containers listed by ID:
+Para todos los contenedores listados por ID:
 
 ```sh
 docker stats $(docker ps -q)
 ```
 
-For all containers listed by name:
+Para todos los contenedores listados por nombre:
 
 ```sh
 docker stats $(docker ps --format '{{.Names}}')
 ```
 
-For all containers listed by image:
+Para todos los contenedores listados por imÃ¡gen:
 
 ```sh
 docker ps -a -f ancestor=ubuntu
 ```
 
-Remove all untagged images:
+Eliminar todas las imÃ¡genes sin etiquetas:
 
 ```sh
-docker rmi $(docker images | grep “^” | awk '{split($0,a," "); print a[3]}')
+docker rmi $(docker images | grep â€œ^â€ | awk '{split($0,a," "); print a[3]}')
 ```
 
-Remove container by a regular expression:
+Eliminar contenedores mediante una expresiÃ³n regular:
 
 ```sh
 docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm -f
 ```
 
-Remove all exited containers:
+Elimina todos los contenedores en estado "Exit":
 
 ```sh
 docker rm -f $(docker ps -a | grep Exit | awk '{ print $1 }')
 ```
 
-### Volumes can be files
+### Los volÃºmenes pueden ser ficheros
 
-Be aware that you can mount files as volumes. For example you can inject a configuration file like this:
+Ten encuenta que puedes montar ficheros como volÃºmenes. Por ejemplo, pueden inyectar un archivo de configuraciÃ³n asÃ­:
 
 ```sh
-# copy file from container
+# copia el archivo del contenedor
 docker run --rm httpd cat /usr/local/apache2/conf/httpd.conf > httpd.conf
 
-# edit file
+# edita el archivo
 vim httpd.conf
 
-# start container with modified configuration
+# inicia el contenedor con la configuracion modificada
 docker run --rm -it -v "$PWD/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro" -p "80:80" httpd
 ```
 
-## Contributing
+## ContribuciÃ³n
 
-Here's how to contribute to this cheat sheet.
+AquÃ­ tienes como contribuÃ­r a esta chuleta.
 
 ### Open README.md
 
-Click [README.md](https://github.com/wsargent/docker-cheat-sheet/blob/master/README.md) <-- this link
+hack click en el [README.md](https://github.com/wsargent/docker-cheat-sheet/blob/master/README.md) <-- este link
 
-![Click This](images/click.png)
+![Click](../images/click.png)
 
 ### Edit Page
 
-![Edit This](images/edit.png)
+![Edit](../images/edit.png)
 
 ### Make Changes and Commit
 
-![Change This](images/change.png)
+![Cambios](../images/change.png)
 
-![Commit](images/commit.png)
+![Commit](../images/commit.png)
 
