@@ -1,6 +1,7 @@
 # Hi — I'm Kalvin 👋
 
 [![profile-badge](https://img.shields.io/badge/Status-Security%20Hardened-brightgreen)]()
+[![readme sync](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/kalvinparker/kalvinparker/main/profile-template/.github/last-sync.json)](https://github.com/kalvinparker/kalvinparker/actions)
 
 Welcome! I'm a security-minded engineer focused on DevSecOps, infrastructure as code, and reliable CI/CD.
 
