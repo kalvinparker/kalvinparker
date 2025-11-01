@@ -2,11 +2,9 @@ name: Propose README Snapshot Updates
 
 on:
   schedule:
-    - cron: '0 3 * * *' # daily at 03:00 UTC
+    - cron: '0 3 * * *'
   workflow_dispatch: {}
 
-# MANDATORY: Enforce Least Privilege for the GITHUB_TOKEN.
-# The job only needs to read content and create PRs.
 permissions:
   contents: write
   pull-requests: write
@@ -22,12 +20,13 @@ jobs:
         shell: pwsh
         run: |
           Set-Location ${{ github.workspace }}
-          # The script is now only responsible for updating files in the workspace.
           powershell -ExecutionPolicy Bypass -File .\scripts\import_readmes.ps1 -FullCloneIfMissing
 
       - name: Create Pull Request if changes occurred
         uses: peter-evans/create-pull-request@v6
         with:
+          # Use the dedicated PAT to authorize cross-repository PR creation
+          token: ${{ secrets.AUTOMATION_PAT }}
           commit-message: "docs: refresh README snapshots"
           title: "Automated README Snapshot Update"
           body: |
