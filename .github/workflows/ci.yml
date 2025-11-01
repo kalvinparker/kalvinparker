@@ -1,5 +1,10 @@
 name: CI
 
+# Restrict default token permissions for security. The workflow will use the
+# repository secret REPO_PAT only for the topics update step if provided.
+permissions:
+  contents: read
+
 on:
   push:
     branches: [ main ]
@@ -23,14 +28,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: validate
     if: github.event_name == 'push'
+    permissions:
+      contents: read
     steps:
       - name: Set repository topics (optional)
         env:
           REPO: ${{ github.repository }}
           TOPICS: "profile,devsecops,devops,iac,ci-cd"
-          GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
+          REPO_PAT: ${{ secrets.REPO_PAT }}
         run: |
-          if [ -z "$GITHUB_TOKEN" ]; then echo "No REPO_PAT secret found; skipping topics update"; exit 0; fi
+          if [ -z "$REPO_PAT" ]; then echo "No REPO_PAT secret found; skipping topics update"; exit 0; fi
           echo "Setting topics: $TOPICS for $REPO"
-          curl -s -X PUT -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/$REPO/topics -d "{\"names\": [$(echo $TOPICS | sed 's/,/", \"/g' | sed 's/^/\"/' | sed 's/$/\"/')] }"
+          # Build JSON payload safely
+          TOPIC_JSON=$(printf '%s' "$TOPICS" | awk -v q='"' -v OFS=, '{ n=split($0,a,","); printf("\"%s\"", a[1]); for(i=2;i<=n;i++) printf(", \"%s\"", a[i]) }')
+          PAYLOAD="{\"names\": [${TOPIC_JSON}] }"
+          curl -s -X PUT -H "Authorization: token $REPO_PAT" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/$REPO/topics -d "$PAYLOAD"
