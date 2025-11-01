@@ -1,0 +1,60 @@
+name: Sync Security Policy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'SECURITY.md'
+
+jobs:
+  sync-policy-to-repos:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: ['kalvinparker/ELK-Stack', 'kalvinparker/secure-gemini']
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Source Repo (`profile-template`)
+        uses: actions/checkout@v4
+        with:
+          path: 'source'
+
+      - name: Checkout Target Repo (${{ matrix.repo }})
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repo }}
+          path: 'target'
+          # Use a PAT here if the GITHUB_TOKEN lacks cross-repo permissions
+          # token: ${{ secrets.POLICY_SYNC_PAT }}
+
+      - name: Compare and Sync File
+        run: |
+          SOURCE_FILE="source/SECURITY.md"
+          TARGET_FILE="target/SECURITY.md"
+          if ! cmp -s "$SOURCE_FILE" "$TARGET_FILE"; then
+            echo "Policy files differ. Preparing update..."
+            cp $SOURCE_FILE $TARGET_FILE
+            echo "NEEDS_PR=true" >> $GITHUB_ENV
+          else
+            echo "Policy is already in sync."
+            echo "NEEDS_PR=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Pull Request if Needed
+        if: env.NEEDS_PR == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          path: 'target'
+          commit-message: "chore(governance): Sync SECURITY.md from source"
+          title: "Update SECURITY.md Policy"
+          body: |
+            This PR was automatically generated to sync the `SECURITY.md` file with the central policy.
+
+            Please review and merge.
+          branch: "governance/sync-security-policy"
+          delete-branch: true
