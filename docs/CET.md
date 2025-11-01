@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/CET.git
 Commit: f71793d
 Author: kalvinparker <106995826+kalvinparker@users.noreply.github.com>
-License: 
-Imported-on: 2025-11-01T22:17:35.8051504+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:08.9070186+00:00 -->
 
 <!DOCTYPE html>
 <html>

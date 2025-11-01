@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/Security-Tools.git
 Commit: e44c411
 Author: kalvinparker <106995826+kalvinparker@users.noreply.github.com>
-License: 
-Imported-on: 2025-11-01T22:17:32.9170845+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:06.0879702+00:00 -->
 
 # Security-Tools
 

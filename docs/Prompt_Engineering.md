@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/Prompt_Engineering.git
 Commit: 1eb3a8d
 Author: kalvinparker <106995826+kalvinparker@users.noreply.github.com>
-License: 
-Imported-on: 2025-11-01T22:17:51.3917567+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:21.9369940+00:00 -->
 
 # Prompt_Engineering
 

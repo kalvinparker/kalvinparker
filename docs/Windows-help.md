@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/Windows-help.git
 Commit: d135d40
 Author: kalvinparker <106995826+kalvinparker@users.noreply.github.com>
-License: 
-Imported-on: 2025-11-01T22:17:31.4372373+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:04.6575758+00:00 -->
 
 # Windows-help
 

@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/WSL.git
 Commit: e847d61
 Author: C─ât─âlin Emil Fetoiu <fetoiucatalinemil@gmail.com>
-License: 
-Imported-on: 2025-11-01T22:17:34.7451547+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:07.7978644+00:00 -->
 
 This repo is for:
 

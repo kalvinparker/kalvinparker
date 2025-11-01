@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/docker-cheat-sheet.git
 Commit: ea7edbf
 Author: JacobLinCool <jacoblincool@gmail.com>
-License: 
-Imported-on: 2025-11-01T22:17:52.3709944+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:22.7432306+00:00 -->
 
 # Docker Cheat Sheet
 

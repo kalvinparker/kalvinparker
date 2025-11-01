@@ -1,8 +1,10 @@
 ﻿<!-- Imported from https://github.com/kalvinparker/SAST.git
 Commit: de821d0
 Author: kalvinparker <106995826+kalvinparker@users.noreply.github.com>
-License: 
-Imported-on: 2025-11-01T22:17:49.6810063+00:00 -->
+License-Name: 
+License-Text: 
+
+Imported-on: 2025-11-01T22:21:20.5459236+00:00 -->
 
 # SAST
 
