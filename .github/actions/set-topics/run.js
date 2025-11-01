@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const { Octokit } = require('@octokit/rest')
-const core = require('@actions/core')
 
 async function run() {
   try {

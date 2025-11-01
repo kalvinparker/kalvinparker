@@ -16,17 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Node (for markdownlint)
+      - name: Install Node (for local action)
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: markdownlint
-        uses: reviewdog/action-markdownlint@v1
-        with:
-          # run on README.md only to keep it fast
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          filter_mode: added
-          # files: README.md
+      - name: Run super-linter (markdown + shellcheck)
+        uses: github/super-linter@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_MARKDOWN: true
+          VALIDATE_SHELL: true
       - name: Check README exists
         run: |
           if [ ! -f README.md ]; then echo "README.md missing"; exit 1; fi
@@ -34,10 +33,7 @@ jobs:
         run: |
           # simple check for unclosed HTML comment markers used by templates
           if grep -R "<!-- START_" -n README.md; then echo "Template markers present"; fi
-      - name: shellcheck
-        uses: ludeeus/action-shellcheck@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      
 
   set-topics:
     runs-on: ubuntu-latest

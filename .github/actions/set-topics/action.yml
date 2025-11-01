@@ -10,6 +10,10 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Install Node dependencies
+      run: |
+        npm ci
+      working-directory: ./.github/actions/set-topics
     - name: Run set-topics script
       shell: bash
       run: |

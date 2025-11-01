@@ -1,0 +1,9 @@
+{
+  "name": "set-topics",
+  "version": "0.1.0",
+  "description": "Local action to set GitHub repository topics",
+  "private": true,
+  "dependencies": {
+    "@octokit/rest": "^19.0.0"
+  }
+}
