@@ -1,0 +1,20 @@
+name: "Set Topics"
+description: "Set repository topics using the provided token or GITHUB_TOKEN"
+inputs:
+  topics:
+    description: "Comma-separated list of topics"
+    required: true
+  token:
+    description: "Optional token (PAT). If omitted, GITHUB_TOKEN will be used."
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Run set-topics script
+      shell: bash
+      run: |
+        node ./.github/actions/set-topics/run.js
+      env:
+        TOPICS: ${{ inputs.topics }}
+        TOKEN: ${{ inputs.token }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
