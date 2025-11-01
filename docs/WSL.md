@@ -1,4 +1,5 @@
-﻿This repo is for:
+﻿<!-- Snapshot imported from https://github.com/kalvinparker/WSL on 2025-11-01 -->
+This repo is for:
 
 - Reporting of issues found within and when using Windows Subsystem for Linux.
   Please read [CONTRIBUTING.md](https://github.com/Microsoft/WSL/blob/master/CONTRIBUTING.md) before making an issue submission

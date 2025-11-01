@@ -1,5 +1,7 @@
 ﻿# Docker Cheat Sheet
 
+<!-- Snapshot imported from https://github.com/kalvinparker/docker-cheat-sheet on 2025-11-01 -->
+
 **Want to improve this cheat sheet?  See the [Contributing](#contributing) section!**
 
 ## Table of Contents

@@ -1,4 +1,5 @@
 ﻿# CVE-Extraction-Tool
+<!-- Snapshot imported from https://github.com/kalvinparker/CET on 2025-11-01 -->
 A tool to extract CVE IDs from a webpage, and lists the results as a list. Also generates a report which states, total CVE IDs found, lists duplicates and unique IDs.
 
 1. As a Python script, I want to be able to extract CVE IDs from a report, so that I can import the data into a spreadsheet column and give each CVE ID its own row.

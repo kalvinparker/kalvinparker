@@ -11,6 +11,8 @@
 [📖 Documentation][docs]
 </div>
 
+<!-- Snapshot imported from https://github.com/kalvinparker/trivy on 2025-11-01 -->
+
 Trivy ([pronunciation][pronunciation]) is a comprehensive and versatile security scanner.
 Trivy has *scanners* that look for security issues, and *targets* where it can find those issues.
 
