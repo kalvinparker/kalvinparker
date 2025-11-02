@@ -1,16 +1,31 @@
 param(
     [string[]]$Repos = @('Windows-help','Security-Tools','WSL','CET','trivy','SAST','Prompt_Engineering','docker-cheat-sheet'),
-    [switch]$FullCloneIfMissing
+    [switch]$FullCloneIfMissing,
+    [string]$OutputPath
 )
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $root = Resolve-Path "$root\.." | Select-Object -ExpandProperty Path
 $profile = $root
-$docsDir = Join-Path $profile 'docs'
+# If OutputPath is supplied use it (relative paths resolved against script root), otherwise default to profile/docs
+if ($OutputPath) {
+    if (-not (Split-Path -Path $OutputPath -IsAbsolute)) {
+        $docsDir = Join-Path $root $OutputPath
+    } else {
+        $docsDir = $OutputPath
+    }
+} else {
+    $docsDir = Join-Path $profile 'docs'
+}
 $tmp = Join-Path $profile 'tmp_imports'
 
 if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp }
 New-Item -ItemType Directory -Path $tmp | Out-Null
+
+# Ensure output docs directory exists
+if (-not (Test-Path $docsDir)) {
+    New-Item -ItemType Directory -Path $docsDir -Force | Out-Null
+}
 
 $report = @()
 
