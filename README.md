@@ -11,9 +11,9 @@ Welcome! I'm a security-minded engineer focused on DevSecOps, infrastructure as 
 
 ## Contact
 
-- Email: mailto:you@example.com
-- LinkedIn: https://www.linkedin.com/in/kalvinparker
-- Website: https://example.com
+- Email: mailto:kalvinparker1+github@gmail.com
+- LinkedIn: https://www.linkedin.com/in/kalvin-p-0b5065300/
+- Website: https://kalvinparker.github.io/mywebsite/
 
 ## Skills & Tools
 
