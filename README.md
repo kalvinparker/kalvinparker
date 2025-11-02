@@ -5,9 +5,9 @@
 
 Welcome! I'm a security-minded engineer focused on DevSecOps, infrastructure as code, and reliable CI/CD.
 
-- 🔭 I’m currently working on: ELK Stack hardening and reproducible CI pipelines
-- 🌱 Learning of the day: <!-- START_LEARNING -->Automating secure CI for Docker Compose stacks<!-- END_LEARNING -->
-- ⚡ Most used tool this week: <!-- START_TOOL -->gh, docker, python<!-- END_TOOL -->
+- 🔭 I’m currently working on: Automating README snapshot sync across repositories and ELK Stack hardening
+- 🌱 Learning of the day: <!-- START_LEARNING -->GitHub Actions security, PAT scopes, and secret-scanning mitigation<!-- END_LEARNING -->
+- ⚡ Most used tool this week: <!-- START_TOOL -->PowerShell, gh, docker<!-- END_TOOL -->
 
 ## Contact
 
