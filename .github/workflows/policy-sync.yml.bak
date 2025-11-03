@@ -1,4 +1,4 @@
-﻿name: Sync Security Policy
+name: Sync Security Policy
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout Source Repo (`kalvinparker`)
+      - name: Checkout Source Repo (`profile-template`)
         uses: actions/checkout@v4
         with:
           path: 'source'
@@ -58,4 +58,3 @@ jobs:
             Please review and merge.
           branch: "governance/sync-security-policy"
           delete-branch: true
-
