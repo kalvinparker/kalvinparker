@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — ci: make super-linter non-blocking to avoid failing on legacy markdown issues (kalvinparker)
+- 2025-11-05 — ci: allow statuses/checks write so super-linter can post status (kalvinparker)
