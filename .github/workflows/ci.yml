@@ -46,6 +46,7 @@ jobs:
       contents: read
       issues: write
     steps:
+      - uses: actions/checkout@v4
       - name: Set repository topics (local action)
         uses: ./.github/actions/set-topics
         with:
