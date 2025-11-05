@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — chore: format README (auto) (kalvinparker)
+- 2025-11-05 — chore(ci): trigger workflow after set-topics manifest fix (kalvinparker)
