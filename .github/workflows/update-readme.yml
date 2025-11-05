@@ -37,7 +37,6 @@ jobs:
               echo "" >> $OUT
             fi
           done
-          cp $OUT ./
 
       - name: Update README snapshot (insert CHANGES.md into README)
         run: |
