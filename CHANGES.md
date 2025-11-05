@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — ci: allow statuses/checks write so super-linter can post status (kalvinparker)
+- 2025-11-05 — Merge branch 'main' of https://github.com/kalvinparker/kalvinparker (kalvinparker)
