@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — fix(ci): avoid cp copying CHANGES.md onto itself in update-readme workflow (kalvinparker)
+- 2025-11-05 — ci: make super-linter non-blocking to avoid failing on legacy markdown issues (kalvinparker)
