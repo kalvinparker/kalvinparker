@@ -88,3 +88,15 @@ jobs:
           else
             echo "No changes to commit"
           fi
+
+      - name: Run Trivy filesystem scan (high,critical) and upload results
+        uses: docker://aquasec/trivy:latest
+        with:
+          args: 
+            fs /github/workspace --severity HIGH,CRITICAL -f json -o /github/workspace/trivy_results.json
+
+      - name: Upload Trivy results
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-results
+          path: trivy_results.json
