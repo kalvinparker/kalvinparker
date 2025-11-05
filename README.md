@@ -12,9 +12,20 @@ Welcome! I'm a security-minded engineer focused on DevSecOps, infrastructure as 
 ## Skills & Tools
 
 ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white)
+![PowerShell](https://img.shields.io/badge/-PowerShell-012456?logo=powershell&logoColor=white)
 ![Docker](https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white)
+![Node.js](https://img.shields.io/badge/-Node.js-43853D?logo=node.js&logoColor=white)
+![npm](https://img.shields.io/badge/-npm-CB3837?logo=npm&logoColor=white)
 ![Elastic](https://img.shields.io/badge/-Elastic-005571?logo=elastic&logoColor=white)
+![Terraform](https://img.shields.io/badge/-Terraform-7B42BC?logo=terraform&logoColor=white)
+![Trivy](https://img.shields.io/badge/-Trivy-0A0A0A?logo=aquasecurity&logoColor=white)
+![detect-secrets](https://img.shields.io/badge/-detect--secrets-2B7A78?logo=python&logoColor=white)
+![git-filter-repo](https://img.shields.io/badge/-git--filter--repo-4B6F9C?logo=git&logoColor=white)
+![GitHub CLI](https://img.shields.io/badge/-gh%20cli-000000?logo=github&logoColor=white)
+
+Core focus areas: DevSecOps, Infrastructure-as-Code, CI/CD automation, container security, and observability.
 
 ## Weekly time graph
 
