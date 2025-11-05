@@ -1,0 +1,90 @@
+name: Update profile README and CHANGES
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # daily at 12:00 UTC
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Gather recent commits and update CHANGES.md
+        run: |
+          set -e
+          echo "Collecting recent commits from sibling repos..."
+          REPOS=(secure-gemini ELK-Stack mywebsite KSyP.tech kalvinparker)
+          OUT=CHANGES.md
+          echo "# Combined changelog" > $OUT
+          echo "" >> $OUT
+          for r in "${REPOS[@]}"; do
+            if [ -d "../$r" ]; then
+              echo "## $r" >> $OUT
+              (cd ../$r && git log -n 5 --pretty=format:"- %ad — %s (%an)" --date=short) >> $OUT || true
+              echo "" >> $OUT
+            else
+              echo "## $r" >> $OUT
+              echo "- (repo not present)" >> $OUT
+              echo "" >> $OUT
+            fi
+          done
+          cp $OUT ./
+
+      - name: Update README snapshot (insert CHANGES.md into README)
+        run: |
+          set -euo pipefail
+          README=README.md
+          TMP=README.updated
+          if [ ! -f "$README" ]; then
+            echo "No $README found, skipping README update"
+            exit 0
+          fi
+
+          # Insert contents of CHANGES.md after the '## Recent changes' heading
+          awk '
+            BEGIN {ins=0}
+            { if(!ins) {
+                print $0
+                if($0=="## Recent changes") {
+                  # print a blank line then the CHANGES.md contents
+                  print ""
+                  while((getline line < "CHANGES.md")>0) print line
+                  ins=1
+                }
+              } else {
+                # once inserted, skip until we reach a line that is exactly '---'
+                if($0=="---") { print $0; ins=2 }
+              }
+            }
+            END { }
+          ' "$README" > "$TMP"
+
+          # If the marker '---' wasn't found after insertion, append the rest
+          if ! grep -q "---" "$TMP"; then
+            echo "" >> "$TMP"
+            echo "---" >> "$TMP"
+          fi
+
+          mv "$TMP" "$README"
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGES.md || true
+          git add README.md || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update CHANGES.md and README snapshot"
+            git push origin HEAD:main
+          else
+            echo "No changes to commit"
+          fi
