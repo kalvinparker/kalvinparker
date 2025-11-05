@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — chore(ci): trigger workflow after set-topics manifest fix (kalvinparker)
+- 2025-11-05 — Merge branch 'main' of https://github.com/kalvinparker/kalvinparker (kalvinparker)
