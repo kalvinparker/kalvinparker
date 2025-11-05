@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — ci: checkout in set-topics job so local action is available (kalvinparker)
+- 2025-11-05 — fix(actions/set-topics): add shell to composite step so action manifest validates (kalvinparker)
