@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — fix(actions/set-topics): add shell to composite step so action manifest validates (kalvinparker)
+- 2025-11-05 — chore: format README (auto) (kalvinparker)
