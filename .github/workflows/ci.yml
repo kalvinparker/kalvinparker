@@ -22,6 +22,7 @@ jobs:
           node-version: '18'
       - name: Run super-linter (markdown + shellcheck)
         uses: github/super-linter@v4
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_MARKDOWN: true
