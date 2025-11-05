@@ -4,6 +4,8 @@ name: CI
 # repository secret REPO_PAT only for the topics update step if provided.
 permissions:
   contents: read
+  statuses: write
+  checks: write
 
 on:
   push:
