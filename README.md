@@ -49,15 +49,11 @@ Note: these entries are pulled from the top-level repositories present in Github
 
 ---
 
-## In other news
 
-Please see `SECURITY.md` for the project's security policy, reporting instructions, and support expectations.
-Please see `changes.md` for this repo's changes.
-Please see `license.md` for the project's license, 
+## **I**n **O**ther **N**ews
+
+* **🛡️ S**ecurity **P**olicy: **R**eview **o**ur **s**ecurity **p**olicy, **i**ncluding **r**eporting **i**nstructions **a**nd **s**upport **e**xpectations. [**S**ECURITY.md **H**yperlink]
+* **📜 P**roject **L**og: **D**iscover **a**ll **r**ecent **u**pdates, **f**eatures, **a**nd **i**mprovements **f**or **t**his **r**epository. [**C**HANGES.md **H**yperlink]
+* **⚖️ L**icense **D**etails: **F**ind **t**he **o**fficial **l**icense **a**nd **t**erms **f**or **u**sing **t**his **p**roject. [**L**ICENSE.md **H**yperlink]
 
 
----
-
----
-
----
