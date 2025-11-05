@@ -9,12 +9,6 @@ Welcome! I'm a security-minded engineer focused on DevSecOps, infrastructure as 
 - 🌱 Learning of the day: <!-- START_LEARNING -->GitHub Actions security, PAT scopes, and secret-scanning mitigation<!-- END_LEARNING -->
 - ⚡ Most used tool this week: <!-- START_TOOL -->PowerShell, gh, docker<!-- END_TOOL -->
 
-## Contact
-
-[![Email](https://img.shields.io/badge/Email-kalvinparker1%2Bgithub%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:kalvinparker1+github@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-kalvin--p--0b5065300-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kalvin-p-0b5065300/)
-[![Website](https://img.shields.io/badge/Website-kalvinparker.github.io%2Fmywebsite%2F-101010?style=for-the-badge&logo=github&logoColor=white)](https://kalvinparker.github.io/mywebsite/)
-
 ## Skills & Tools
 
 ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white)
@@ -25,6 +19,21 @@ Welcome! I'm a security-minded engineer focused on DevSecOps, infrastructure as 
 ## Weekly time graph
 
 ![Time graph](./assets/timegraph.svg)
+
+## Recent changes
+
+Summary of the latest updates in this repo:
+
+- 2025-11-03 — feat: updated repository references and enhanced workflow scripts for better automation and diagnostics
+- 2025-11-03 — feat: added `set-secret-and-dispatch.ps1` script for PAT management and workflow dispatch
+- 2025-11-03 — docs: added `npm-audit.json` capturing audit findings related to lockfile
+- 2025-11-02 — docs: README synced and security notes refreshed
+- 2025-11-02 — docs: updated contact section with badge links
+- 2025-11-02 — docs: updated contact information
+- 2025-11-01 — chore: merged PR to enable auto README sync
+- 2025-11-01 — docs: refreshed README snapshots
+- 2025-11-01 — chore(ci): added workspace-only import script for PR workflow
+- 2025-11-01 — ci: replaced sync workflow with PR-based least-privilege workflow
 
 ---
 
