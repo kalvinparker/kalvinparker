@@ -13,7 +13,7 @@ runs:
     - name: Install Node dependencies
       shell: bash
       run: |
-        npm ci
+        npm install --silent
       working-directory: ./.github/actions/set-topics
     - name: Run set-topics script
       shell: bash
