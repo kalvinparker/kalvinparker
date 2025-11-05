@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-05 — Merge branch 'main' of https://github.com/kalvinparker/kalvinparker (kalvinparker)
+- 2025-11-05 — ci: checkout in set-topics job so local action is available (kalvinparker)
