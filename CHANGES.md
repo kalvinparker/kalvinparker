@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-08 — chore: make push in regenerate workflow robust (rebase + force-with-lease) (kalvinparker)
+- 2025-11-08 — Merge pull request #5 from kalvinparker/fix/markdown-autofix (kalvinparker)
