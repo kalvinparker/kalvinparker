@@ -2,10 +2,10 @@
 
 ## How to file issues and get help  
 
-This project uses [GitHub Issues][gh-issue] to [track bugs][gh-bug] and [feature requests][gh-feature]. Please search the existing issues before filing new issues to avoid duplicates.  For new issues, file your bug or 
+This project uses [GitHub Issues][gh-issue] to [track bugs][gh-bug] and [feature requests][gh-feature]. Please search the existing issues before filing new issues to avoid duplicates.  For new issues, file your bug or
 feature request as a new Issue.
 
-For general information on the Windows Subsystem for Linux, including help, tutorials, how-tos and reference guides, please view our [WSL documentation](https://docs.microsoft.com/windows/wsl/). 
+For general information on the Windows Subsystem for Linux, including help, tutorials, how-tos and reference guides, please view our [WSL documentation](https://docs.microsoft.com/windows/wsl/).
 
 ## Microsoft Support Policy
 

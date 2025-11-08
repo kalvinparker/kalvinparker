@@ -1,3 +1,4 @@
+# IP Forwarding Enabled: A Security Risk
 ## IP Forwarding Enabled: A Security Risk
 
 **What is IP Forwarding?**
