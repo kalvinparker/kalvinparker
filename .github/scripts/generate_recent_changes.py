@@ -23,21 +23,39 @@ def load_repos(path):
 def get_latest_commit(owner_repo, token):
     headers = {'Authorization': f'token {token}'} if token else {}
     owner, repo = owner_repo.split('/')
-    # get default branch
-    r = requests.get(f'{GITHUB_API}/repos/{owner}/{repo}', headers=headers)
-    if r.status_code != 200:
+    try:
+        # get default branch
+        url_repo = f'{GITHUB_API}/repos/{owner}/{repo}'
+        print(f"REQUEST: GET {url_repo}")
+        r = requests.get(url_repo, headers=headers)
+        print(f"RESPONSE: {r.status_code} {r.reason} for {owner_repo}")
+        if r.status_code != 200:
+            try:
+                print(f"  body: {r.text[:400]}")
+            except Exception:
+                pass
+            return None
+        data = r.json()
+        branch = data.get('default_branch', 'main')
+        # get latest commit on default branch
+        url_commit = f'{GITHUB_API}/repos/{owner}/{repo}/commits/{branch}'
+        print(f"REQUEST: GET {url_commit}")
+        r2 = requests.get(url_commit, headers=headers)
+        print(f"RESPONSE: {r2.status_code} {r2.reason} for commit {owner_repo}@{branch}")
+        if r2.status_code != 200:
+            try:
+                print(f"  body: {r2.text[:400]}")
+            except Exception:
+                pass
+            return None
+        c = r2.json()
+        sha = c.get('sha', '')[:7]
+        date = c.get('commit', {}).get('committer', {}).get('date', '')
+        message = c.get('commit', {}).get('message', '').split('\n')[0]
+        return {'repo': owner_repo, 'sha': sha, 'date': date, 'message': message}
+    except Exception as ex:
+        print(f"ERROR: Exception while fetching {owner_repo}: {ex}")
         return None
-    data = r.json()
-    branch = data.get('default_branch', 'main')
-    # get latest commit on default branch
-    r2 = requests.get(f'{GITHUB_API}/repos/{owner}/{repo}/commits/{branch}', headers=headers)
-    if r2.status_code != 200:
-        return None
-    c = r2.json()
-    sha = c.get('sha', '')[:7]
-    date = c.get('commit', {}).get('committer', {}).get('date', '')
-    message = c.get('commit', {}).get('message', '').split('\n')[0]
-    return {'repo': owner_repo, 'sha': sha, 'date': date, 'message': message}
 
 def render_section(entries):
     lines = []
@@ -74,6 +92,7 @@ def replace_section(readme_path, new_section):
         content = pattern.sub(new_section + '\n---', content, count=1)
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(content)
+    print(f"WROTE: {readme_path} (new section written)")
 
 def main():
     token = os.environ.get('GITHUB_TOKEN')

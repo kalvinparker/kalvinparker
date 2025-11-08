@@ -33,16 +33,16 @@ Core focus areas: DevSecOps, Infrastructure-as-Code, CI/CD automation, container
 
 ## Recent changes (aggregate across workspace)
 
-Summary of the most recent commits across active repositories in this workspace:
+Summary of the most recent commits across active repositories:
 
-- 2025-11-05 — ELK-Stack — 59ba1eb — chore: add .secrets.baseline and detect_secrets_ELK-Stack.out files
-- 2025-11-05 — getting-started-todo-app — 731049e — refactor: update Dockerfile and package.json for consistency; add zap.yaml for security scanning
-- 2025-11-05 — mywebsite — 15948a0 — Add .secrets.baseline and detect_secrets_mywebsite.out files for secret detection configuration
-- 2025-11-05 — secure-gemini — 75dce51 — Merge branch 'master' of https://github.com/kalvinparker/secure-gemini
-- 2025-11-05 — kalvinparker — f30d54b — docs: link skills badges and aggregate recent changes across workspace
-- 2025-09-21 — KSyP.tech — 8c51a43 — Update fundamental-secuurity-concepts.md
+- 2025-11-05 — kalvinparker/ELK-Stack — 59ba1eb — chore: add .secrets.baseline and detect_secrets_ELK-Stack.out files
+- 2025-11-05 — kalvinparker/getting-started-todo-app — a7a15a4 — chore: add initial .markdownlint.json configuration for markdown linting
+- 2025-11-05 — kalvinparker/mywebsite — 15948a0 — Add .secrets.baseline and detect_secrets_mywebsite.out files for secret detection configuration
+- 2025-11-08 — kalvinparker/secure-gemini — 4f49657 — ci: add GHCR debug login step (fix duplicate)
+- 2024-09-21 — kalvinparker/KSyP.tech — 8c51a43 — Update fundamental-secuurity-concepts.md
+- 2025-11-08 — kalvinparker/kalvinparker — 1cfaa7d — chore: update CHANGES.md and README snapshot
 
-Note: these entries are pulled from the top-level repositories present in Github.com/kalvinparker and show the latest commit date, short SHA, and commit title.
+Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
 ---
 
