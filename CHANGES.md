@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-08 — chore: trigger workflows (kalvinparker)
+- 2025-11-08 — chore: add diagnostic logging to generate_recent_changes.py (kalvinparker)
