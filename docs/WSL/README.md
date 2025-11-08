@@ -1,3 +1,4 @@
+# Reporting issues in Windows Console or WSL text rendering/user experience
 This repo is for:
 
 - Reporting of issues found within and when using Windows Subsystem for Linux.
@@ -9,7 +10,7 @@ This repo is for:
 
 ## Reporting issues in Windows Console or WSL text rendering/user experience
 
-Note that WSL distro's launch in the Windows Console (unless you have taken steps to launch a 3rd party console/terminal). Therefore, *please file UI/UX related issues in the [Windows Console issue tracker](https://github.com/microsoft/console)*. 
+Note that WSL distro's launch in the Windows Console (unless you have taken steps to launch a 3rd party console/terminal). Therefore, *please file UI/UX related issues in the [Windows Console issue tracker](https://github.com/microsoft/console)*.
 
 ## Labels:
 

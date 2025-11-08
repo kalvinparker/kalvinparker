@@ -1,3 +1,4 @@
+# Important: Reporting BSODs and Security issues
 Please provide as much information as possible when reporting a bug or filing an issue on the Windows Subsystem for Linux.
 
 ## Important: Reporting BSODs and Security issues
@@ -34,14 +35,14 @@ Note: The Windows Insider builds contain many updates and fixes. If you are runn
 
 Should include all packages and environmental variables as well as other required configuration.
 
-#### Example: On linux 
+#### Example: On linux
 
 `$ sudo apt-get install traceroute && traceroute www.microsoft.com`
 
 #### Example: On Windows
 
 ``
-`$ cmd.exe` 
+`$ cmd.exe`
 `CD C:\Windows\System32\`
 `tracert.exe`
 ``
@@ -50,7 +51,7 @@ Should include all packages and environmental variables as well as other require
 
 #### Example:
 
-```
+```bash
 $ traceroute www.microsoft.com
 traceroute to www.microsoft.com (23.75.239.28), 30 hops max, 60 byte packets
 setsockopt IP_MTU_DISCOVER: Invalid argument
@@ -64,7 +65,7 @@ What was the expected result of the command?  Include examples / documentation i
 
 Run the failing command under [strace](http://manpages.ubuntu.com/manpages/wily/man1/strace.1.html).  Normal command structure is:
 
-```
+```bash
 $ strace -ff <command>
 ```
 
@@ -72,7 +73,7 @@ $ strace -ff <command>
 
 #### Example:
 
-```
+```bash
 $ strace traceroute www.microsoft.com
 execve("/usr/bin/traceroute", ["traceroute", "www.microsoft.com"], [/* 22 vars */]) = 0
 brk(0)                                  = 0x7fffdd3bc000
@@ -99,7 +100,7 @@ Common files are:
 * Additional strace logs if the error occurs within a fork. The following
   command generates an output file for every fork created:
 
-```
+```bash
 $ strace -ff -o <outputfile> <command>
 ```
 
@@ -158,18 +159,18 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 The script will output the path of the log file once done.
 
 ### 9) Collect WSL logs with Feedback hub
-To collect WSL logs follow these steps: 
+To collect WSL logs follow these steps:
 
 #### Open Feedback Hub and enter the title and description of your issue
 
-- Open Feedback hub and create a new issue by pressing `Windows Key + F` on your keyboard. 
+- Open Feedback hub and create a new issue by pressing `Windows Key + F` on your keyboard.
 - Enter in the details of your issue:
    - In `Summarize your feedback` copy and paste in the title of your Github Issue
    - In `Explain in more detail` copy and paste a link to your Github Issue
 
 ![GIF Of networking instructions](img/networkinglog1.gif)
 
-#### Choose the WSL category 
+#### Choose the WSL category
 
 - Select that your issue is a `Problem`
 - Choose the `Developer Platform` category and the `Windows Subsystem for Linux` subcategory
@@ -180,7 +181,7 @@ To collect WSL logs follow these steps:
 
 - Select 'Other' under 'Which of the following best describes your problem'
 - Click 'Recreate My Problem' under 'Attachments
-- Ensure that `Include Data About:` is checked to 'Windows Subsystem for Linux' 
+- Ensure that `Include Data About:` is checked to 'Windows Subsystem for Linux'
 - 'Click Start Recording' to start collecting logs
 - Recreate your problem
 - Click 'Stop Recording'
@@ -218,7 +219,7 @@ Make sure that the email body contains:
 
 The easiest way to report a WSL process crash is by [collecting a user-mode crash dump](https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps).
 
-To collect dumps of all running WSL processe, please open a PowerShell prompt with admin privileges, navigate to a folder where you'd like to put your log files and run these commands: 
+To collect dumps of all running WSL processe, please open a PowerShell prompt with admin privileges, navigate to a folder where you'd like to put your log files and run these commands:
 
 ```
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/microsoft/WSL/master/diagnostics/collect-wsl-logs.ps1" -OutFile collect-wsl-logs.ps1
@@ -230,7 +231,7 @@ The script will output the path to the log file when it is done.
 
 #### Enable automatic crash dump collection
 
-If your crash is sporadic or hard to reproduce, please enable automatic crash dumps to catch logs for this behavior: 
+If your crash is sporadic or hard to reproduce, please enable automatic crash dumps to catch logs for this behavior:
 
 ```
 md C:\crashes

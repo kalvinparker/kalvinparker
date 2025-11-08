@@ -18,26 +18,26 @@
 
    - Open a terminal window.
    - Navigate to your Downloads directory:
-   - 
+   -
      ```Bash
      cd ~/Downloads
      ```
      
    - Read the directory with the following command to show the `downloaded_file_name`:
-   - 
+   -
      ```Bash
      ls
      ```
      
    - Prepare the `SHA256_checksum` and `downloaded_file_name` with `text editor`. This ensures the downloaded file is not corrupted. Use the following command:
-   - 
+   -
      ```bash
      echo "sha256sum_checksum downloaded_file_name" > sha256sum_nessus
      ```
      
      Replace `[downloaded_file_name]` with the actual filename (e.g., `Nessus-10.6.3-debian10_amd64.deb`). The output should match the checksum provided on the Tenable website.
    - Run the following command:
-   - 
+   -
      ```bash
      sha256sum -c sha256sum_nessus
      ```
@@ -107,6 +107,6 @@
 
 - If you encounter firewall issues, you may need to adjust your firewall rules to allow Nessus to function properly.
 - For further configuration options and advanced usage, refer to the Nessus documentation: [https://docs.tenable.com/](https://docs.tenable.com/)
-- Nessus updates are typically available through the Kali package manager. You can update Nessus with `sudo apt update && sudo apt upgrade`. Make sure to stop the Nessus service first 
+- Nessus updates are typically available through the Kali package manager. You can update Nessus with `sudo apt update && sudo apt upgrade`. Make sure to stop the Nessus service first
 
 **Congratulations! You've successfully installed and activated Nessus on your Kali Linux system.** You can now use Nessus to perform vulnerability scans on target systems. Refer to the Nessus documentation for instructions on launching scans and interpreting results.
