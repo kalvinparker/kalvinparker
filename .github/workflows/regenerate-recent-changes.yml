@@ -40,8 +40,19 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
             git add README.md
-            git commit -m "chore: regenerate Recent changes section [skip ci]"
-            git push origin HEAD:main
+            git commit -m "chore: regenerate Recent changes section [skip ci]" || echo "nothing to commit"
+            # Ensure we are up to date and rebase local commit onto the latest main
+            git fetch origin main
+            if git rebase origin/main; then
+              git push origin HEAD:main || (
+                echo "Push failed after rebase, attempting safe force with lease";
+                git push --force-with-lease origin HEAD:main
+              )
+            else
+              echo "Rebase failed, aborting rebase and attempting safe force with lease";
+              git rebase --abort || true
+              git push --force-with-lease origin HEAD:main
+            fi
           else
             echo "No changes to commit"
           fi
