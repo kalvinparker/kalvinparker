@@ -28,6 +28,7 @@ if (-not (Test-Path $docsDir)) {
 }
 
 $report = @()
+$failures = 0
 
 foreach ($r in $Repos) {
     $repoUrl = "https://github.com/kalvinparker/$r.git"
@@ -78,6 +79,7 @@ foreach ($r in $Repos) {
         }
     } catch {
         $report += ("Failed to clone/import {0}: {1}" -f $r, $_.Exception.Message)
+        $failures++
     }
 }
 
@@ -96,3 +98,10 @@ if (Test-Path $tmp) {
 
 Write-Output "--- REPORT ---"
 $report | ForEach-Object { Write-Output $_ }
+
+# Exit with non-zero only if every repo failed to clone/import
+if ($failures -eq $Repos.Count) {
+    Exit 1
+} else {
+    Exit 0
+}
