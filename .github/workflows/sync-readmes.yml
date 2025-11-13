@@ -33,7 +33,14 @@ jobs:
         continue-on-error: true
         run: |
           # The script is in source-repo, but its output must go to target-repo
-          ./source-repo/scripts/import_readmes.ps1 -OutputPath ./target-repo/docs
+          try {
+            ./source-repo/scripts/import_readmes.ps1 -OutputPath ./target-repo/docs
+            Write-Host "Script completed. LASTEXITCODE: $LASTEXITCODE"
+          } catch {
+            Write-Host "Script threw an exception: $_"
+          }
+          # Force success so downstream steps run and we can observe PR creation or artifact upload
+          Exit 0
 
       # Diagnostic step: list checkouts and confirm PAT presence (helps triage failures)
       - name: "Debug: list workspace and tokens"
