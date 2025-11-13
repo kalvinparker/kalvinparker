@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-12 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2025-11-13 — ci(sync-readmes): force import step success to allow PR/artifact steps to run (kalvinparker)
