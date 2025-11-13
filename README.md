@@ -37,11 +37,11 @@ Core focus areas: DevSecOps, Infrastructure-as-Code, CI/CD automation, container
 Summary of the most recent commits across active repositories:
 
 - 2025-11-05 — kalvinparker/ELK-Stack — 59ba1eb — chore: add .secrets.baseline and detect_secrets_ELK-Stack.out files
-- 2025-11-05 — kalvinparker/getting-started-todo-app — a7a15a4 — chore: add initial .markdownlint.json configuration for markdown linting
+- 2025-11-13 — kalvinparker/getting-started-todo-app — 041abdf — feat: add README and PowerShell script for expunging sensitive blobs from git history
 - 2025-11-05 — kalvinparker/mywebsite — 15948a0 — Add .secrets.baseline and detect_secrets_mywebsite.out files for secret detection configuration
 - 2025-11-08 — kalvinparker/secure-gemini — 4f49657 — ci: add GHCR debug login step (fix duplicate)
 - 2024-09-21 — kalvinparker/KSyP.tech — 8c51a43 — Update fundamental-secuurity-concepts.md
-- 2025-11-13 — kalvinparker/kalvinparker — 949fb22 — Merge branch 'main' of https://github.com/kalvinparker/kalvinparker
+- 2025-11-13 — kalvinparker/kalvinparker — 2fcee9c — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
