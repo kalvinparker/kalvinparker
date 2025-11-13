@@ -62,6 +62,25 @@ jobs:
             echo "pat_present=false" >> $GITHUB_OUTPUT
           fi
 
+      # If the PAT is present, ensure there is at least one file change to commit.
+      # This avoids the create-pull-request action skipping branch creation when
+      # the import script produced no diffs (e.g. only listing files were written).
+      - name: Ensure commitable change
+        if: ${{ steps.pat_check.outputs.pat_present == 'true' }}
+        run: |
+          echo "Checking for changes under target-repo/docs..."
+          # Operate inside the target-repo checkout so git status sees the working tree
+          cd target-repo
+          mkdir -p docs
+          # See if any tracked/staged/unstaged changes exist under the docs path
+          if [ -n "$(git status --porcelain docs)" ]; then
+            echo "Changes detected in docs; no forced change necessary."
+          else
+            echo "No changes detected in docs; creating timestamp to force PR."
+            date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/.auto_readme_sync
+            echo "Wrote docs/.auto_readme_sync"
+          fi
+
       # Step 4: Create the pull request against the target repo
       - name: Create Pull Request
         if: ${{ steps.pat_check.outputs.pat_present == 'true' }}
@@ -78,6 +97,37 @@ jobs:
             Source workflow is in the `profile-template` repository.
           branch: "chore/auto-readme-sync"
           delete-branch: true
+
+      # After the PR is created, remove the auto timestamp file so it does not remain in the PR.
+      - name: Remove timestamp from PR branch
+        if: ${{ steps.pat_check.outputs.pat_present == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Attempting to remove target-repo/docs/.auto_readme_sync from PR branch chore/auto-readme-sync if present"
+          cd target-repo
+          # Configure credentials for pushing with the PAT used earlier
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${{ secrets.AUTOMATION_PAT }}"
+          # Fetch the branch created by the create-pull-request action if it exists
+          if git ls-remote --exit-code --heads origin chore/auto-readme-sync >/dev/null 2>&1; then
+            git fetch origin chore/auto-readme-sync:chore/auto-readme-sync
+            git checkout chore/auto-readme-sync
+          else
+            echo "Branch chore/auto-readme-sync does not exist on origin; nothing to remove"
+            exit 0
+          fi
+
+          if [ -f docs/.auto_readme_sync ]; then
+            git rm -f docs/.auto_readme_sync || true
+            if git commit -m "ci: remove auto-generated timestamp file" >/dev/null 2>&1; then
+              echo "Committed removal; pushing to origin chore/auto-readme-sync"
+              git push origin chore/auto-readme-sync
+            else
+              echo "No commit was created (no changes)"
+            fi
+          else
+            echo "No timestamp file found in docs; nothing to remove"
+          fi
 
       # If the automation PAT is not available (for example in forks or when the secret is missing),
       # upload the generated docs so they can be inspected manually.
