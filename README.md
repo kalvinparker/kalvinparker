@@ -56,3 +56,5 @@ Note: these entries are pulled from the repositories listed in `.github/scripts/
 * **🛡️ Security policy:** Review our security policy, including reporting instructions and support expectations — see [SECURITY.md](SECURITY.md).
 * **📜 Project log:** Discover recent updates, features, and improvements for this repository — see [CHANGES.md](CHANGES.md).
 * **⚖️ License details:** Find the official license and terms for using this project — see [LICENSE](LICENSE).
+
+---

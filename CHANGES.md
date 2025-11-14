@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-14 — Update README.md (kalvinparker)
+- 2025-11-14 — Clean up README.md by removing empty lines (kalvinparker)
