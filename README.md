@@ -35,12 +35,12 @@ Welcome! I'm a security-minded engineer focused on Governance, DevSecOps, infras
 
 Summary of the most recent commits across active repositories:
 
-- 2025-11-05 — kalvinparker/ELK-Stack — 59ba1eb — chore: add .secrets.baseline and detect_secrets_ELK-Stack.out files
-- 2025-11-13 — kalvinparker/getting-started-todo-app — 041abdf — feat: add README and PowerShell script for expunging sensitive blobs from git history
-- 2025-11-05 — kalvinparker/mywebsite — 15948a0 — Add .secrets.baseline and detect_secrets_mywebsite.out files for secret detection configuration
-- 2025-11-08 — kalvinparker/secure-gemini — 4f49657 — ci: add GHCR debug login step (fix duplicate)
-- 2024-09-21 — kalvinparker/KSyP.tech — 8c51a43 — Update fundamental-secuurity-concepts.md
-- 2025-11-14 — kalvinparker/kalvinparker — d970944 — chore: update CHANGES.md and README snapshot
+- 2025-11-20 — kalvinparker/ELK-Stack — f4c8903 — Merge pull request #1 from kalvinparker/chore/add-contributing
+- 2025-11-20 — kalvinparker/getting-started-todo-app — c8f3abb — Merge pull request #1 from kalvinparker/chore/add-contributing
+- 2025-11-20 — kalvinparker/mywebsite — de6d7b6 — Merge pull request #1 from kalvinparker/chore/add-contributing
+- 2025-11-20 — kalvinparker/secure-gemini — 2fa1482 — Merge pull request #22 from kalvinparker/chore/add-contributing
+- 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
+- 2025-11-20 — kalvinparker/kalvinparker — b20f0a2 — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
