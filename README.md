@@ -8,25 +8,24 @@ Welcome! I'm a security-minded engineer focused on Governance, DevSecOps, infras
 
 - 🔭 I’m currently working on: Automating README snapshot sync across repositories and ELK Stack hardening
 - 🌱 Learning of the day: <!-- START_LEARNING -->GitHub Actions security, PAT scopes, and secret-scanning mitigation<!-- END_LEARNING -->
-- ⚡ Most used tool this week: <!-- START_TOOL -->PowerShell, gh, docker<!-- END_TOOL -->
+- ⚡ Most used tool this week: <!-- START_TOOL -->PowerShell, gh, docker, cargo-audit<!-- END_TOOL -->
 
 ## Skills & Tools
 
-![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white)
 ![PowerShell](https://img.shields.io/badge/-PowerShell-012456?logo=powershell&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
-![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white)
-![Node.js](https://img.shields.io/badge/-Node.js-43853D?logo=node.js&logoColor=white)
-![npm](https://img.shields.io/badge/-npm-CB3837?logo=npm&logoColor=white)
-![Elastic](https://img.shields.io/badge/-Elastic-005571?logo=elastic&logoColor=white)
-![Terraform](https://img.shields.io/badge/-Terraform-7B42BC?logo=terraform&logoColor=white)
+![cargo-audit](https://img.shields.io/badge/-cargo--audit-000000?logo=cargo&logoColor=white)
+![cargo-deny](https://img.shields.io/badge/-cargo--deny-000000?logo=rust&logoColor=white)
 ![Trivy](https://img.shields.io/badge/-Trivy-0A0A0A?logo=aquasecurity&logoColor=white)
 ![detect-secrets](https://img.shields.io/badge/-detect--secrets-2B7A78?logo=python&logoColor=white)
 ![git-filter-repo](https://img.shields.io/badge/-git--filter--repo-4B6F9C?logo=git&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+![Docker](https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white)
+![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white)
 ![GitHub CLI](https://img.shields.io/badge/-gh%20cli-000000?logo=github&logoColor=white)
+![npm](https://img.shields.io/badge/-npm-CB3837?logo=npm&logoColor=white)
+![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white)
 
-Core focus areas: DevSecOps, Infrastructure-as-Code, CI/CD automation, container security, and observability.
+- 🔍 Core focus areas: DevSecOps, Infrastructure-as-Code, CI/CD automation, container security, and observability.
 
 ## Weekly time graph
 
@@ -56,21 +55,3 @@ Note: these entries are pulled from the repositories listed in `.github/scripts/
 * **🛡️ Security policy:** Review our security policy, including reporting instructions and support expectations — see [SECURITY.md](SECURITY.md).
 * **📜 Project log:** Discover recent updates, features, and improvements for this repository — see [CHANGES.md](CHANGES.md).
 * **⚖️ License details:** Find the official license and terms for using this project — see [LICENSE](LICENSE).
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
-
----
