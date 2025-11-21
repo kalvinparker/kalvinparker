@@ -35,12 +35,12 @@ Welcome! I'm a security-minded engineer focused on Governance, DevSecOps, infras
 
 Summary of the most recent commits across active repositories:
 
-- 2025-11-20 — kalvinparker/ELK-Stack — f4c8903 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2025-11-20 — kalvinparker/getting-started-todo-app — c8f3abb — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2025-11-20 — kalvinparker/mywebsite — de6d7b6 — Merge pull request #1 from kalvinparker/chore/add-contributing
+- 2025-11-21 — kalvinparker/ELK-Stack — 318e120 — Merge pull request #2 from kalvinparker/chore/add-ci-security
+- 2025-11-21 — kalvinparker/getting-started-todo-app — b8a905b — Merge pull request #2 from kalvinparker/chore/add-ci-security
+- 2025-11-21 — kalvinparker/mywebsite — b52b2fe — Merge pull request #2 from kalvinparker/chore/add-ci-security
 - 2025-11-20 — kalvinparker/secure-gemini — 2fa1482 — Merge pull request #22 from kalvinparker/chore/add-contributing
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2025-11-20 — kalvinparker/kalvinparker — b20f0a2 — chore: update CHANGES.md and README snapshot
+- 2025-11-21 — kalvinparker/kalvinparker — d2c2ac4 — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
