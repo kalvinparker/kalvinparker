@@ -38,9 +38,9 @@ Summary of the most recent commits across active repositories:
 - 2025-11-21 — kalvinparker/ELK-Stack — 318e120 — Merge pull request #2 from kalvinparker/chore/add-ci-security
 - 2025-11-21 — kalvinparker/getting-started-todo-app — b8a905b — Merge pull request #2 from kalvinparker/chore/add-ci-security
 - 2025-11-21 — kalvinparker/mywebsite — b52b2fe — Merge pull request #2 from kalvinparker/chore/add-ci-security
-- 2025-11-21 — kalvinparker/secure-gemini — b6c9724 — Merge pull request #23 from kalvinparker/chore/add-ci-security
+- 2025-11-22 — kalvinparker/secure-gemini — 9a30b94 — Potential fix for code scanning alert no. 2: Workflow does not contain permissions
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2025-11-21 — kalvinparker/kalvinparker — 3332275 — chore: regenerate Recent changes section [skip ci]
+- 2025-11-22 — kalvinparker/kalvinparker — bb3a08d — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
