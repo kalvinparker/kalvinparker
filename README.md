@@ -57,3 +57,5 @@ Note: these entries are pulled from the repositories listed in `.github/scripts/
 * **⚖️ License details:** Find the official license and terms for using this project — see [LICENSE](LICENSE).
 
 ---
+
+---
