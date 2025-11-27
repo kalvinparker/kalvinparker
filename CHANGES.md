@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2025-11-27 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2025-11-27 — Merge pull request #10 from kalvinparker/chore/auto-readme-sync (kalvinparker)
