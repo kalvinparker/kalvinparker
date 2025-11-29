@@ -40,7 +40,7 @@ Summary of the most recent commits across active repositories:
 - 2025-11-21 — kalvinparker/mywebsite — b52b2fe — Merge pull request #2 from kalvinparker/chore/add-ci-security
 - 2025-11-22 — kalvinparker/secure-gemini — 16a55e7 — Merge branch 'main' of https://github.com/kalvinparker/secure-gemini
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2025-11-27 — kalvinparker/kalvinparker — d903420 — chore: regenerate Recent changes section [skip ci]
+- 2025-11-28 — kalvinparker/kalvinparker — a21913b — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
