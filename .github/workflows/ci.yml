@@ -1,3 +1,111 @@
+name: CI
+
+# Restrict default token permissions for security. The workflow will use the
+# repository secret REPO_PAT only for the topics update step if provided.
+permissions:
+  contents: read
+  statuses: write
+  checks: write
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node (for local action)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Run super-linter (markdown + shellcheck)
+        uses: github/super-linter@v4
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_MARKDOWN: true
+          VALIDATE_SHELL: true
+      - name: Check README exists
+        run: |
+          if [ ! -f README.md ]; then echo "README.md missing"; exit 1; fi
+      - name: Lint Markdown (basic)
+        run: |
+          # simple check for unclosed HTML comment markers used by templates
+          if grep -R "<!-- START_" -n README.md; then echo "Template markers present"; fi
+
+  set-topics:
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'push'
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set repository topics (local action)
+        uses: ./.github/actions/set-topics
+        with:
+          topics: "profile,devsecops,devops,iac,ci-cd"
+          token: ${{ secrets.REPO_PAT }}
+name: CI
+
+# Restrict default token permissions for security. The workflow will use the
+# repository secret REPO_PAT only for the topics update step if provided.
+permissions:
+  contents: read
+  statuses: write
+  checks: write
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node (for local action)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Run super-linter (markdown + shellcheck)
+        uses: github/super-linter@v4
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_MARKDOWN: true
+          VALIDATE_SHELL: true
+      - name: Check README exists
+        run: |
+          if [ ! -f README.md ]; then echo "README.md missing"; exit 1; fi
+      - name: Lint Markdown (basic)
+        run: |
+          # simple check for unclosed HTML comment markers used by templates
+          if grep -R "<!-- START_" -n README.md; then echo "Template markers present"; fi
+
+  set-topics:
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'push'
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set repository topics (local action)
+        uses: ./.github/actions/set-topics
+        with:
+          topics: "profile,devsecops,devops,iac,ci-cd"
+          token: ${{ secrets.REPO_PAT }}
 name: Automated Security Gates
 
 on:
