@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-01-16 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2026-01-16 — chore(ci): merge fix/security-scan-action-fix (kalvinparker)
