@@ -33,20 +33,21 @@ jobs:
           # token: ${{ secrets.POLICY_SYNC_PAT }}
 
       - name: Compare and Sync File
+        id: compare
         run: |
           SOURCE_FILE="source/SECURITY.md"
           TARGET_FILE="target/SECURITY.md"
           if ! cmp -s "$SOURCE_FILE" "$TARGET_FILE"; then
             echo "Policy files differ. Preparing update..."
             cp $SOURCE_FILE $TARGET_FILE
-            echo "NEEDS_PR=true" >> $GITHUB_ENV
+            echo "needs_pr=true" >> $GITHUB_OUTPUT
           else
             echo "Policy is already in sync."
-            echo "NEEDS_PR=false" >> $GITHUB_ENV
+            echo "needs_pr=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Create Pull Request if Needed
-        if: env.NEEDS_PR == 'true'
+        if: ${{ steps.compare.outputs.needs_pr == 'true' }}
         uses: peter-evans/create-pull-request@v6
         with:
           path: 'target'
