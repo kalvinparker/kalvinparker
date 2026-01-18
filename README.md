@@ -40,7 +40,7 @@ Summary of the most recent commits across active repositories:
 - 2026-01-16 — kalvinparker/mywebsite — 31997f7 — chore(ci): merge fix/code-scanning-action
 - 2026-01-16 — kalvinparker/secure-gemini — 7b52e1c — chore(ci): merge fix/split-workflows
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2026-01-16 — kalvinparker/kalvinparker — e38f5bc — chore: regenerate Recent changes section [skip ci]
+- 2026-01-17 — kalvinparker/kalvinparker — f386b1a — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
