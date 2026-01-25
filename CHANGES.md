@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-01-24 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2026-01-25 — Merge fix/add-skip-dirs: add SECURITY.md CI paragraph (kalvinparker)
