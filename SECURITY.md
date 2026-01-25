@@ -48,3 +48,14 @@ Repository: `kalvinparker`
 
 Primary contacts / maintainers: kalvinparker1+github@gmail.com
 
+
+## CI Scans and Secrets
+
+Our CI workflows run automated security scans (Trivy for repo/image scanning and SonarCloud for code analysis) and upload SARIF results to GitHub Code Scanning and as artifacts. The workflows may require repository secrets to enable full functionality (for example `SONAR_TOKEN` for SonarCloud and `GHCR_PAT` for publishing container images).
+
+- Never commit secrets to the repository. Add required secrets in the repository Settings → Secrets and rotate them regularly.
+- Workflows should not reference secrets directly in validation expressions (for example `if:`). Instead, CI checks determine secret presence at runtime and skip or exit early when secrets are absent.
+- Grant the minimum permissions to CI tokens and review third‑party actions (owner/repo@ref) before enabling workflows.
+
+If you have questions about CI credentials or scan results, contact the maintainers at the address above.
+
