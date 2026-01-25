@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-01-25 — Merge fix/add-skip-dirs: add SECURITY.md CI paragraph (kalvinparker)
+- 2026-01-25 — chore: clean up README.md by removing excessive separator lines (kalvinparker)
