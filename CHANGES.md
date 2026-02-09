@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-09 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2026-02-09 — Merge pull request #14 from kalvinparker/fix/readme-snapshots (kalvinparker)
