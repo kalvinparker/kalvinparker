@@ -24,6 +24,11 @@ async function run() {
     await octokit.rest.repos.replaceAllTopics({ owner, repo, names: topics })
     console.log('Topics updated')
   } catch (err) {
+    // If the token lacks permission (HTTP 403) treat this as non-fatal
+    if (err && err.status === 403) {
+      console.error('Permission denied when updating topics (403). Skipping topics update.')
+      process.exit(0)
+    }
     console.error('Error updating topics:', err)
     process.exit(1)
   }
