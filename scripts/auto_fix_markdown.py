@@ -110,11 +110,13 @@ def fix_file(path: Path) -> bool:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print('Usage: auto_fix_markdown.py <file-or-dir> [...]')
-        sys.exit(2)
+    # If no args are provided, default to processing the current directory
+    # This makes the script safe to invoke from npm or CI without explicit paths.
+    args = sys.argv[1:]
+    if not args:
+        args = ['.']
     targets = []
-    for a in sys.argv[1:]:
+    for a in args:
         p = Path(a)
         if p.is_dir():
             targets.extend(list(p.rglob('*.md')))
