@@ -37,10 +37,10 @@ Summary of the most recent commits across active repositories:
 
 - 2026-01-16 — kalvinparker/ELK-Stack — bfcd459 — chore(ci): merge fix/code-scanning-action
 - 2026-01-16 — kalvinparker/getting-started-todo-app — bf52af7 — chore(ci): merge fix/code-scanning-action
-- 2026-01-16 — kalvinparker/mywebsite — 31997f7 — chore(ci): merge fix/code-scanning-action
+- 2026-02-09 — kalvinparker/mywebsite — b4ef62c — Merge fix/add-skip-dirs into main
 - 2026-01-16 — kalvinparker/secure-gemini — 7b52e1c — chore(ci): merge fix/split-workflows
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2026-02-07 — kalvinparker/kalvinparker — a539d4c — chore: update CHANGES.md and README snapshot
+- 2026-02-08 — kalvinparker/kalvinparker — ba9e784 — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
