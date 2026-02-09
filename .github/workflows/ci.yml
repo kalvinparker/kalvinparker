@@ -43,7 +43,7 @@ jobs:
     needs: validate
     if: github.event_name == 'push'
     permissions:
-      contents: read
+      contents: write
       issues: write
     steps:
       - uses: actions/checkout@v4
