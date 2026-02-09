@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-09 — Merge pull request #15 from kalvinparker/fix/set-topics-ci (kalvinparker)
+- 2026-02-09 — ci(security): update CodeQL upload-sarif action to v3 (github-actions[bot])
