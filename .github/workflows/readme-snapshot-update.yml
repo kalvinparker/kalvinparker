@@ -1,0 +1,65 @@
+name: Propose README Snapshot Updates
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-readme-snapshots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run README snapshot update
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          BRANCH="readme-snapshots/update-${GITHUB_RUN_ID}"
+
+          if [ -x "./scripts/update-readme-snapshots.sh" ]; then
+            echo "Running ./scripts/update-readme-snapshots.sh"
+            ./scripts/update-readme-snapshots.sh
+          else
+            if [ -f package.json ]; then
+              echo "package.json found — attempting npm run update-readme-snapshots"
+              npm ci --silent || true
+              npm run update-readme-snapshots || true
+            else
+              echo "No update script or package.json found; nothing to do"
+              exit 0
+            fi
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH" || git checkout -b "$BRANCH"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: update README snapshots"
+          git push --set-upstream origin "$BRANCH"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update README snapshots"
+          branch: readme-snapshots/update-${{ github.run_id }}
+          title: "Propose README Snapshot Updates"
+          body: |
+            This automated PR proposes updates to README snapshots.
+          labels: automated,readme
