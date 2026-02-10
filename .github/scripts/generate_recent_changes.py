@@ -90,6 +90,8 @@ def replace_section(readme_path, new_section):
             content = content + '\n' + new_section
     else:
         content = pattern.sub(new_section + '\n---', content, count=1)
+    # Collapse any repeated '---' dividers into a single one to avoid accumulative runs
+    content = re.sub(r'(?:\n---\s*){2,}', '\n---\n', content)
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(content)
     print(f"WROTE: {readme_path} (new section written)")
