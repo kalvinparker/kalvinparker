@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-10 — fix(readme): collapse duplicate '---' dividers (github-actions[bot])
+- 2026-02-10 — chore: merge origin/main; keep regenerated README (github-actions[bot])
