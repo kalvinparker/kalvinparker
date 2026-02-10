@@ -75,6 +75,10 @@ jobs:
 
           mv "$TMP" "$README"
 
+          # Collapse consecutive '---' dividers into a single divider to avoid
+          # accumulating many horizontal rules after repeated runs.
+          perl -0777 -pe "s/(?:\n---\s*){2,}/\n---\n/g" "$README" > "$TMP" && mv "$TMP" "$README"
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
