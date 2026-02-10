@@ -7,7 +7,41 @@ Recent changes section in README.md with an aggregated list.
 """
 import os
 import re
-import requests
+try:
+    import requests
+    _HAS_REQUESTS = True
+except Exception:
+    import urllib.request as _urllib_request
+    import urllib.error as _urllib_error
+    import json as _json
+    _HAS_REQUESTS = False
+
+    class _SimpleResponse:
+        def __init__(self, code, body, reason=''):
+            self.status_code = code
+            self.reason = reason
+            self.text = body
+        def json(self):
+            try:
+                return _json.loads(self.text)
+            except Exception:
+                return {}
+
+    def _urllib_get(url, headers=None):
+        req = _urllib_request.Request(url)
+        if headers:
+            for k, v in headers.items():
+                req.add_header(k, v)
+        try:
+            with _urllib_request.urlopen(req, timeout=15) as r:
+                body = r.read().decode('utf-8')
+                return _SimpleResponse(r.getcode(), body, r.reason)
+        except _urllib_error.HTTPError as e:
+            try:
+                body = e.read().decode('utf-8')
+            except Exception:
+                body = ''
+            return _SimpleResponse(e.code if hasattr(e, 'code') else 0, body, getattr(e, 'reason', ''))
 from datetime import datetime
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -27,8 +61,11 @@ def get_latest_commit(owner_repo, token):
         # get default branch
         url_repo = f'{GITHUB_API}/repos/{owner}/{repo}'
         print(f"REQUEST: GET {url_repo}")
-        r = requests.get(url_repo, headers=headers)
-        print(f"RESPONSE: {r.status_code} {r.reason} for {owner_repo}")
+        if _HAS_REQUESTS:
+            r = requests.get(url_repo, headers=headers)
+        else:
+            r = _urllib_get(url_repo, headers=headers)
+        print(f"RESPONSE: {r.status_code} {getattr(r, 'reason', '')} for {owner_repo}")
         if r.status_code != 200:
             try:
                 print(f"  body: {r.text[:400]}")
@@ -40,8 +77,11 @@ def get_latest_commit(owner_repo, token):
         # get latest commit on default branch
         url_commit = f'{GITHUB_API}/repos/{owner}/{repo}/commits/{branch}'
         print(f"REQUEST: GET {url_commit}")
-        r2 = requests.get(url_commit, headers=headers)
-        print(f"RESPONSE: {r2.status_code} {r2.reason} for commit {owner_repo}@{branch}")
+        if _HAS_REQUESTS:
+            r2 = requests.get(url_commit, headers=headers)
+        else:
+            r2 = _urllib_get(url_commit, headers=headers)
+        print(f"RESPONSE: {r2.status_code} {getattr(r2, 'reason', '')} for commit {owner_repo}@{branch}")
         if r2.status_code != 200:
             try:
                 print(f"  body: {r2.text[:400]}")
