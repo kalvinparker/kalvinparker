@@ -23,7 +23,30 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+
+      - name: Lint changed Markdown files (PRs only, non-blocking)
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          # fetch main for diffing
+          git fetch origin main --depth=1 || true
+          CHANGED_MD=$(git diff --name-only origin/main...HEAD | grep -E "\.md$" || true)
+          if [ -z "$CHANGED_MD" ]; then
+            echo "No changed Markdown files to lint"
+            exit 0
+          fi
+          echo "Linting changed Markdown files:"
+          echo "$CHANGED_MD"
+          # install markdown linter if not present
+          if ! command -v npx >/dev/null 2>&1; then
+            echo "npx not found; please ensure Node is available"
+            exit 0
+          fi
+          npx markdownlint-cli2 $CHANGED_MD || true
+
       - name: Run super-linter (markdown + shellcheck)
+        if: github.event_name == 'push'
         uses: github/super-linter@v4
         continue-on-error: true
         env:
