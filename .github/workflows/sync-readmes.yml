@@ -13,11 +13,18 @@ jobs:
     runs-on: ubuntu-latest # Switched to ubuntu for better cross-compat
     steps:
       # Step 1: Checkout the source of the script and content (this repo)
-      - name: Checkout Source Repo
+      - name: Checkout Source Repo (with PAT)
+        if: ${{ secrets.AUTOMATION_PAT }}
         uses: actions/checkout@v4
         with:
           path: source-repo
           token: ${{ secrets.AUTOMATION_PAT }}
+
+      - name: Checkout Source Repo (no PAT)
+        if: ${{ !secrets.AUTOMATION_PAT }}
+        uses: actions/checkout@v4
+        with:
+          path: source-repo
 
       # Step 2: Checkout the target repo where the PR will be made
       - name: Checkout Target Repo
