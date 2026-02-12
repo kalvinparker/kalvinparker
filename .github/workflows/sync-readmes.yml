@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: source-repo
+          token: ${{ secrets.AUTOMATION_PAT }}
 
       # Step 2: Checkout the target repo where the PR will be made
       - name: Checkout Target Repo
@@ -108,6 +109,8 @@ jobs:
           cd target-repo
           # Configure credentials for pushing with the PAT used earlier
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${{ secrets.AUTOMATION_PAT }}"
+          # Ensure pushes use the PAT (avoid interactive prompts)
+          git remote set-url origin "https://x-access-token:${{ secrets.AUTOMATION_PAT }}@github.com/${{ github.repository }}"
           # Fetch the branch created by the create-pull-request action if it exists
           if git ls-remote --exit-code --heads origin chore/auto-readme-sync >/dev/null 2>&1; then
             git fetch origin chore/auto-readme-sync:chore/auto-readme-sync
