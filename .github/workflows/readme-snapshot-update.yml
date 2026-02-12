@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -24,6 +26,7 @@ jobs:
       - name: Run README snapshot update
         env:
           GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           BRANCH="readme-snapshots/update-${GITHUB_RUN_ID}"
@@ -51,6 +54,8 @@ jobs:
             exit 0
           fi
           git commit -m "chore: update README snapshots"
+          # Ensure pushes use the provided token (avoid interactive prompts)
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}"
           git push --set-upstream origin "$BRANCH"
 
       - name: Create Pull Request
