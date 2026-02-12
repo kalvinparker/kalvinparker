@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-12 — Merge pull request #21 from kalvinparker/fix/readme-pr-needed-output (kalvinparker)
+- 2026-02-12 — Merge pull request #22 from kalvinparker/fix/sync-readmes-env-if (kalvinparker)
