@@ -14,14 +14,14 @@ jobs:
     steps:
       # Step 1: Checkout the source of the script and content (this repo)
       - name: Checkout Source Repo (with PAT)
-        if: ${{ secrets.AUTOMATION_PAT }}
+        if: "${{ secrets.AUTOMATION_PAT != '' }}"
         uses: actions/checkout@v4
         with:
           path: source-repo
           token: ${{ secrets.AUTOMATION_PAT }}
 
       - name: Checkout Source Repo (no PAT)
-        if: ${{ !secrets.AUTOMATION_PAT }}
+        if: "${{ secrets.AUTOMATION_PAT == '' }}"
         uses: actions/checkout@v4
         with:
           path: source-repo
