@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-12 — Merge pull request #23 from kalvinparker/fix/sync-readmes-env-if (kalvinparker)
+- 2026-02-12 — fix: update pull request creation step in README snapshot workflow (github-actions[bot])
