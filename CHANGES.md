@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-12 — Merge pull request #19 from kalvinparker/fix/ci-skip-set-topics-if-no-pat (kalvinparker)
+- 2026-02-12 — Merge pull request #20 from kalvinparker/fix/sync-readmes-checkout-fallback (kalvinparker)
