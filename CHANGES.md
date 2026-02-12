@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-12 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2026-02-12 — Merge pull request #18 from kalvinparker/chore/ci-lint-pr-files (kalvinparker)
