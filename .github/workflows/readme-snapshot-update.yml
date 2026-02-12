@@ -62,13 +62,13 @@ jobs:
           echo "pr_needed=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
-        if: ${{ steps.update_readme.outputs.pr_needed == 'true' }}
-        uses: peter-evans/create-pull-request@v5
+        if: ${{ steps.pat_check.outputs.pat_present == 'true' }}
+        uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: update README snapshots"
-          branch: readme-snapshots/update-${{ github.run_id }}
-          title: "Propose README Snapshot Updates"
-          body: |
-            This automated PR proposes updates to README snapshots.
-          labels: automated,readme
+          token: ${{ secrets.AUTOMATION_PAT }}
+          path: target-repo
+          commit-message: "docs: refresh README snapshots"
+          title: "Automated README Snapshot Update"
+          base: main  # Explicitly set the target branch
+          branch: chore/auto-readme-sync  # The name of the temporary branch
+          delete-branch: true
