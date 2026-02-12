@@ -64,7 +64,8 @@ jobs:
   set-topics:
     runs-on: ubuntu-latest
     needs: validate
-    if: github.event_name == 'push'
+    # Only run on push and when REPO_PAT is configured to avoid git auth failures
+    if: github.event_name == 'push' && secrets.REPO_PAT
     permissions:
       contents: write
       issues: write
