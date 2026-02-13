@@ -68,7 +68,6 @@ def fix_file(path: Path) -> bool:
             if m:
                 in_fence = True
                 fence_delim = m.group('fence')
-                lang = m.group('lang')
                 fence_content = []
                 fence_start_idx = len(out_lines)
                 out_lines.append(ln)  # placeholder
@@ -91,7 +90,7 @@ def fix_file(path: Path) -> bool:
                     chosen_lang = 'xml'
                 # if the fence opener had no lang, replace opener with lang
                 opener = out_lines[fence_start_idx]
-                if re.match(r'^(?P<fence>```+)$', opener):
+                if re.match(r'^(?P<fence>```+)\s*$', opener):
                     if chosen_lang:
                         out_lines[fence_start_idx] = opener + chosen_lang
                 in_fence = False
