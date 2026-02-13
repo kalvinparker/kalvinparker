@@ -62,19 +62,19 @@ jobs:
           if grep -R "<!-- START_" -n README.md; then echo "Template markers present"; fi
 
   set-topics:
-    runs-on: ubuntu-latest
-    needs: validate
-    if: github.event_name == 'push'
-    permissions:
-      contents: write
-      issues: write
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set repository topics (local action)
-        # Use a direct check without the ${{ }} wrappers
-        if: secrets.REPO_PAT != ''
-        uses: ./.github/actions/set-topics
-        with:
-          topics: "profile,devsecops,devops,iac,ci-cd"
-          token: ${{ secrets.REPO_PAT }}
+      runs-on: ubuntu-latest
+      needs: validate
+      if: github.event_name == 'push'
+      permissions:
+        contents: write
+        issues: write
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Set repository topics (local action)
+          # Use the bare expression without brackets
+          if: secrets.REPO_PAT != ''
+          uses: ./.github/actions/set-topics
+          with:
+            topics: "profile,devsecops,devops,iac,ci-cd"
+            token: ${{ secrets.REPO_PAT }}
