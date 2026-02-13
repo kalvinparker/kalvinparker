@@ -2,11 +2,7 @@
 
 # Restrict default token permissions for security. The workflow will use the
 # repository secret REPO_PAT only for the topics update step if provided.
-permissions:
-  statuses: write
-  checks: write
 
-on:
   push:
     branches: [ main ]
   pull_request:
@@ -18,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      checks: write
+      statuses: write
     steps:
       - uses: actions/checkout@v4
       - name: Install Node (for local action)
