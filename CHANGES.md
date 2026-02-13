@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-02-13 — fix: update secret check syntax for setting repository topics (github-actions[bot])
+- 2026-02-13 — Merge pull request #24 from kalvinparker/chore/auto-readme-sync (kalvinparker)
