@@ -14,11 +14,11 @@ runs:
       shell: bash
       run: |
         npm install --silent
-      working-directory: ./.github/actions/set-topics
+      working-directory: ${{ github.action_path }}
     - name: Run set-topics script
       shell: bash
       run: |
-        node ./.github/actions/set-topics/run.js
+        node ${{ github.action_path }}/run.js
       env:
         TOPICS: ${{ inputs.topics }}
         TOKEN: ${{ inputs.token }}
