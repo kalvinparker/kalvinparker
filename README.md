@@ -37,10 +37,10 @@ Summary of the most recent commits across active repositories:
 
 - 2026-01-16 — kalvinparker/ELK-Stack — bfcd459 — chore(ci): merge fix/code-scanning-action
 - 2026-01-16 — kalvinparker/getting-started-todo-app — bf52af7 — chore(ci): merge fix/code-scanning-action
-- 2026-02-10 — kalvinparker/mywebsite — 5295a4c — Update project link for ksyp_gemini-cli in index.html and index.backup.html
-- 2026-01-16 — kalvinparker/secure-gemini — 7b52e1c — chore(ci): merge fix/split-workflows
+- 2026-02-21 — kalvinparker/mywebsite — f30c71f — Add Vite config and Vite entry
+- 2026-02-18 — kalvinparker/secure-gemini — 9157013 — Merge pull request #50 from kalvinparker/dependabot/npm_and_yarn/npm_and_yarn-01f5ad5e18
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2026-02-13 — kalvinparker/kalvinparker — e3baf59 — Merge branch 'main' of https://github.com/kalvinparker/kalvinparker
+- 2026-02-20 — kalvinparker/kalvinparker — 044415a — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
