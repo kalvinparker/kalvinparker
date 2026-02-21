@@ -38,8 +38,8 @@ jobs:
           else
             if [ -f package.json ]; then
               echo "package.json found — attempting npm run update-readme-snapshots"
-              npm ci --silent || true
-              npm run update-readme-snapshots || true
+              npm ci --silent --ignore-scripts || echo "Warning: npm ci failed; continuing anyway"
+              npm run update-readme-snapshots || echo "Warning: npm run update-readme-snapshots failed; continuing anyway"
             else
               echo "No update script or package.json found; nothing to do"
               exit 0
@@ -62,8 +62,8 @@ jobs:
           echo "pr_needed=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
-        if: ${{ steps.pat_check.outputs.pat_present == 'true' }}
-        uses: peter-evans/create-pull-request@v6
+        if: ${{ steps.update_readme.outputs.pr_needed == 'true' }}
+        uses: peter-evans/create-pull-request@271a8d0340265f705b632194301669dad6fe11e4 # v6.1.0
         with:
           token: ${{ secrets.AUTOMATION_PAT }}
           path: target-repo
