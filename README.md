@@ -35,12 +35,10 @@ Welcome! I'm a security-minded engineer focused on Governance, DevSecOps, infras
 
 Summary of the most recent commits across active repositories:
 
-- 2026-01-16 — kalvinparker/ELK-Stack — bfcd459 — chore(ci): merge fix/code-scanning-action
-- 2026-01-16 — kalvinparker/getting-started-todo-app — bf52af7 — chore(ci): merge fix/code-scanning-action
-- 2026-02-21 — kalvinparker/mywebsite — f30c71f — Add Vite config and Vite entry
+- 2026-02-22 — kalvinparker/mywebsite — e8d4f3a — fix: remove invisible characters from index.html
 - 2026-02-18 — kalvinparker/secure-gemini — 9157013 — Merge pull request #50 from kalvinparker/dependabot/npm_and_yarn/npm_and_yarn-01f5ad5e18
 - 2025-11-20 — kalvinparker/KSyP.tech — f525630 — Merge pull request #1 from kalvinparker/chore/add-contributing
-- 2026-02-21 — kalvinparker/kalvinparker — b19e52c — chore: update CHANGES.md and README snapshot
+- 2026-02-22 — kalvinparker/kalvinparker — 5fe7a47 — chore: update CHANGES.md and README snapshot
 
 Note: these entries are pulled from the repositories listed in `.github/scripts/repos.txt`.
 
