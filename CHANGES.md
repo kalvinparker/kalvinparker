@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-04-19 — Update Trivy action version to 0.35.0 (kalvinparker)
+- 2026-04-19 — Merge pull request #25 from kalvinparker/chore/auto-readme-sync (kalvinparker)
