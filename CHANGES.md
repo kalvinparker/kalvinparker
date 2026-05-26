@@ -13,4 +13,4 @@
 - (repo not present)
 
 ## kalvinparker
-- 2026-05-25 — chore: regenerate Recent changes section [skip ci] (github-actions[bot])
+- 2026-05-25 — chore: update CHANGES.md and README snapshot (github-actions[bot])
